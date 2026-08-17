@@ -1,0 +1,8 @@
+{
+  "name": "Boda Melissa & Jhimy",
+  "description": "Invitación Virtual Premium - Matrimonio, Bautizo y Primer Añito de Max Christian - Melissa y Jhimy",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
