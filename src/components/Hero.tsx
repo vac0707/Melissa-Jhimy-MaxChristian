@@ -43,7 +43,7 @@ export default function Hero({ onNextPage }: HeroProps) {
         <img
           src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786990382/rosa.png"
           alt="Decoración floral superior derecha"
-          className="absolute top-0 right-0 w-[40%] sm:w-[38%] max-w-[210px] pointer-events-none z-[5] select-none object-contain"
+          className="absolute top-0 right-0 w-[38%] sm:w-[36%] max-w-[195px] pointer-events-none z-[4] select-none object-contain"
           referrerPolicy="no-referrer"
         />
 
@@ -51,7 +51,7 @@ export default function Hero({ onNextPage }: HeroProps) {
         <img
           src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786990914/izquierda_abajo.png"
           alt="Decoración floral inferior izquierda"
-          className="absolute bottom-0 left-0 w-[48%] sm:w-[46%] max-w-[245px] pointer-events-none z-[5] select-none object-contain"
+          className="absolute -bottom-1 -left-1 w-[38%] sm:w-[35%] max-w-[175px] pointer-events-none z-[4] select-none object-contain"
           referrerPolicy="no-referrer"
         />
 
@@ -59,43 +59,46 @@ export default function Hero({ onNextPage }: HeroProps) {
         <img
           src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786990915/derecha_abajo.png"
           alt="Decoración floral inferior derecha"
-          className="absolute bottom-0 right-0 w-[46%] sm:w-[44%] max-w-[235px] pointer-events-none z-[5] select-none object-contain"
+          className="absolute -bottom-1 -right-1 w-[38%] sm:w-[35%] max-w-[175px] pointer-events-none z-[4] select-none object-contain"
           referrerPolicy="no-referrer"
         />
 
-        {/* TOP-RIGHT INVITATION TEXT BLOCK */}
+        {/* TOP-RIGHT INVITATION TEXT BLOCK (Refined typography & hierarchy) */}
         <motion.div
           initial={{ opacity: 0, x: 15 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="absolute top-[14%] sm:top-[15%] right-[2.5%] sm:right-[3.5%] w-[39%] sm:w-[37%] max-w-[190px] flex flex-col items-center text-center z-10 select-none"
+          className="absolute top-[13.5%] sm:top-[14.5%] right-[2.5%] sm:right-[3.5%] w-[41%] sm:w-[38%] max-w-[195px] flex flex-col items-center text-center z-10 select-none"
         >
-          <span className="font-serif text-[10px] sm:text-[11.5px] md:text-[12.5px] tracking-[0.2em] text-[#112542] uppercase font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
+          {/* Subtitle 1: CON INMENSA */}
+          <span className="font-serif text-[9.5px] sm:text-[11px] md:text-[12px] tracking-[0.26em] text-[#132742] uppercase font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
             {lang === "es" ? "CON INMENSA" : "WITH IMMENSE"}
           </span>
 
-          {/* Flourished cursive script */}
+          {/* Subtitle 2: alegría (Flourished romantic cursive) */}
           <div className="relative my-0 sm:my-0.5">
-            <span className="font-great-vibes text-[38px] sm:text-5xl md:text-6xl text-[#112542] leading-none block select-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+            <span className="font-great-vibes text-[42px] sm:text-[54px] md:text-[62px] text-[#132742] leading-none block select-none drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)] tracking-normal font-normal">
               {lang === "es" ? "alegría" : "joy"}
             </span>
-            <div className="w-12 sm:w-16 h-[1.5px] bg-gradient-to-r from-[#dfb559] to-transparent mt-0.5 mx-auto" />
+            <div className="w-14 sm:w-20 h-[1.5px] bg-gradient-to-r from-transparent via-[#dfb559] to-transparent mt-0.5 mx-auto opacity-80" />
           </div>
 
-          <p className="font-serif text-[8.5px] sm:text-[9.5px] md:text-[10.5px] tracking-[0.14em] text-[#112542] uppercase leading-[1.35] sm:leading-[1.45] font-bold mt-1 sm:mt-1.5 px-0.5 drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
+          {/* Subtitle 3: Te invitamos a compartir... */}
+          <p className="font-serif text-[8.5px] sm:text-[9.5px] md:text-[10.5px] tracking-[0.11em] text-[#132742] uppercase leading-[1.38] font-bold mt-1 sm:mt-1.5 px-0.5 drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
             {lang === "es"
-              ? "TE INVITAMOS A COMPARTIR EL DÍA MÁS IMPORTANTE DE NUESTRA FAMILIA"
-              : "WE INVITE YOU TO SHARE THE MOST IMPORTANT DAY OF OUR FAMILY"}
+              ? "Te invitamos a compartir un día importante para nuestra familia."
+              : "We invite you to share an important day for our family."}
           </p>
 
-          <div className="mt-1 sm:mt-1.5 text-[#c5a059] text-[10px] sm:text-xs">
+          <div className="mt-1 text-[#dfb559] text-[9px] sm:text-[11px] drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
             ♥
           </div>
         </motion.div>
 
-        {/* LOWER SECTION: BRIDE & GROOM NAMES + SON */}
-        <div className="absolute top-[49%] sm:top-[50%] inset-x-0 flex flex-col items-center text-center px-4 z-10 select-none">
+        {/* LOWER SECTION: BRIDE & GROOM NAMES + SON + 3 PILLARS */}
+        <div className="absolute top-[48.5%] sm:top-[49.5%] inset-x-0 flex flex-col items-center text-center px-3 sm:px-4 z-10 select-none">
+          {/* Couple Names: Melissa & Jhimy (Refined, elegant & romantic calligraphy) */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -103,36 +106,36 @@ export default function Hero({ onNextPage }: HeroProps) {
             transition={{ duration: 0.9, delay: 0.3 }}
             className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap"
           >
-            <h1 className="font-great-vibes text-[38px] sm:text-[54px] md:text-[62px] text-[#1B365D] leading-tight select-none tracking-tight">
-              Melissa <span className="text-[#c5a059] font-normal text-3xl sm:text-4xl">&</span> Jhimy
+            <h1 className="font-great-vibes text-[42px] sm:text-[56px] md:text-[64px] text-[#132742] leading-tight select-none tracking-normal font-normal drop-shadow-[0_1.5px_3px_rgba(19,39,66,0.18)]">
+              Melissa <span className="font-wedding text-3xl sm:text-[42px] text-[#c5a059] italic px-1 font-light">&</span> Jhimy
             </h1>
             <svg 
               viewBox="0 0 24 24" 
               fill="none" 
-              stroke="#1B365D" 
-              strokeWidth="1.6" 
+              stroke="#dfb559" 
+              strokeWidth="1.8" 
               strokeLinecap="round" 
               strokeLinejoin="round" 
-              className="w-5 h-5 sm:w-7 sm:h-7 text-[#1B365D] inline-block -rotate-12 mb-1.5 sm:mb-3"
+              className="w-4 h-4 sm:w-6 sm:h-6 inline-block -rotate-12 mb-1.5 sm:mb-2.5 filter drop-shadow-xs"
             >
               <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
             </svg>
           </motion.div>
 
-          <div className="text-[#c5a059] text-[9px] sm:text-xs -mt-1 mb-1">
+          <div className="text-[#dfb559] text-[9px] sm:text-xs -mt-1 mb-1">
             ♥
           </div>
 
-          <span className="font-serif text-[9px] sm:text-[11px] md:text-[12px] tracking-[0.25em] text-[#1B365D] uppercase font-bold block mb-0.5">
+          <span className="font-serif text-[8.5px] sm:text-[10px] md:text-[11px] tracking-[0.26em] text-[#1B365D] uppercase font-bold block mb-0.5">
             {lang === "es" ? "JUNTO A NUESTRO HIJO" : "TOGETHER WITH OUR SON"}
           </span>
 
-          <h2 className="font-serif text-[22px] sm:text-[30px] md:text-[36px] text-[#c5a059] font-bold tracking-[0.16em] uppercase select-none drop-shadow-[0_1px_2px_rgba(223,181,89,0.2)]">
+          <h2 className="font-serif text-[22px] sm:text-[28px] md:text-[34px] text-[#b88c38] font-bold tracking-[0.18em] uppercase select-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
             MAX CHRISTIAN
           </h2>
 
           {/* ORNAMENTAL DIVIDER */}
-          <div className="w-[75%] sm:w-[70%] flex items-center justify-center gap-2 my-1.5 sm:my-2.5">
+          <div className="w-[75%] sm:w-[70%] flex items-center justify-center gap-2 my-1.5 sm:my-2">
             <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#dfb559]/70 to-[#dfb559]" />
             <div className="flex items-center gap-1 text-[#dfb559]">
               <span className="text-[8px] sm:text-[10px]">♦</span>
@@ -142,18 +145,18 @@ export default function Hero({ onNextPage }: HeroProps) {
             <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent via-[#dfb559]/70 to-[#dfb559]" />
           </div>
 
-          {/* THREE PILLARS */}
+          {/* THREE PILLARS (Enhanced with subtle parchment base for maximum contrast & legibility) */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="w-full max-w-md grid grid-cols-3 gap-1 sm:gap-2 text-center mt-1"
+            className="w-[94%] max-w-[420px] bg-[#FAF6F0]/92 backdrop-blur-[2px] rounded-xl border border-[#dfb559]/35 px-2 sm:px-3 py-2 sm:py-2.5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] grid grid-cols-3 gap-1 text-center mt-1 z-10"
           >
             {/* PILLAR 1 */}
-            <div className="flex flex-col items-center px-0.5 sm:px-1">
-              <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center mb-0.5 sm:mb-1">
-                <svg viewBox="0 0 64 64" fill="none" className="w-8 h-8 sm:w-10 sm:h-10 text-[#c5a059]">
+            <div className="flex flex-col items-center px-0.5">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-0.5">
+                <svg viewBox="0 0 64 64" fill="none" className="w-7 h-7 sm:w-9 sm:h-9 text-[#c5a059]">
                   <circle cx="26" cy="36" r="14" stroke="#dfb559" strokeWidth="2.4" />
                   <circle cx="26" cy="36" r="11" stroke="#dfb559" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
                   <circle cx="38" cy="36" r="14" stroke="#c5a059" strokeWidth="2.4" />
@@ -164,30 +167,30 @@ export default function Hero({ onNextPage }: HeroProps) {
                   />
                 </svg>
               </div>
-              <span className="font-serif text-[8px] sm:text-[10px] md:text-[11px] font-bold text-[#1B365D] uppercase tracking-[0.12em] leading-tight">
+              <span className="font-serif text-[8px] sm:text-[9.5px] md:text-[10.5px] font-bold text-[#132742] uppercase tracking-[0.08em] leading-tight drop-shadow-[0_0.5px_0.5px_rgba(255,255,255,0.9)]">
                 {lang === "es" ? "NUESTRO MATRIMONIO" : "OUR WEDDING"}
               </span>
             </div>
 
             {/* PILLAR 2 */}
-            <div className="flex flex-col items-center px-0.5 sm:px-1 border-l border-r border-[#dfb559]/35">
-              <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center mb-0.5 sm:mb-1">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#dfb559" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10">
-                  <path d="M44 26 C46 22 50 20 54 21 C52 24 50 26 50 29 C50 33 46 36 41 37 C36 38 31 43 27 48 C25 45 23 41 21 38 C17 38 12 37 9 35 C14 33 19 32 24 33 C26 27 30 19 37 14 C39 18 39 23 37 28 Z" fill="#dfb559" fillOpacity="0.1" />
+            <div className="flex flex-col items-center px-0.5 border-l border-r border-[#dfb559]/35">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-0.5">
+                <svg viewBox="0 0 64 64" fill="none" stroke="#dfb559" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 sm:w-9 sm:h-9">
+                  <path d="M44 26 C46 22 50 20 54 21 C52 24 50 26 50 29 C50 33 46 36 41 37 C36 38 31 43 27 48 C25 45 23 41 21 38 C17 38 12 37 9 35 C14 33 19 32 24 33 C26 27 30 19 37 14 C39 18 39 23 37 28 Z" fill="#dfb559" fillOpacity="0.12" />
                   <path d="M54 21 Q58 17 61 17 Q58 21 54 21 Z" fill="#dfb559" />
                   <circle cx="48" cy="24" r="1.2" fill="#1B365D" />
                 </svg>
               </div>
-              <span className="font-serif text-[8px] sm:text-[10px] md:text-[11px] font-bold text-[#1B365D] uppercase tracking-[0.12em] leading-tight">
+              <span className="font-serif text-[8px] sm:text-[9.5px] md:text-[10.5px] font-bold text-[#132742] uppercase tracking-[0.08em] leading-tight drop-shadow-[0_0.5px_0.5px_rgba(255,255,255,0.9)]">
                 {lang === "es" ? "EL BAUTIZO DE NUESTRO HIJO" : "OUR SON'S BAPTISM"}
               </span>
             </div>
 
             {/* PILLAR 3 */}
-            <div className="flex flex-col items-center px-0.5 sm:px-1">
-              <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center mb-0.5 sm:mb-1">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#dfb559" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10">
-                  <rect x="14" y="40" width="36" height="15" rx="2" fill="#dfb559" fillOpacity="0.1" />
+            <div className="flex flex-col items-center px-0.5">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-0.5">
+                <svg viewBox="0 0 64 64" fill="none" stroke="#dfb559" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 sm:w-9 sm:h-9">
+                  <rect x="14" y="40" width="36" height="15" rx="2" fill="#dfb559" fillOpacity="0.12" />
                   <path d="M14 45 C20 48, 26 42, 32 45 C38 48, 44 42, 50 45" strokeWidth="1.5" />
                   <rect x="20" y="26" width="24" height="14" rx="2" fill="#dfb559" fillOpacity="0.15" />
                   <path d="M20 31 C24 33, 28 29, 32 31 C36 33, 40 29, 44 31" strokeWidth="1.5" />
@@ -195,7 +198,7 @@ export default function Hero({ onNextPage }: HeroProps) {
                   <path d="M32 18 C30.5 15, 30.5 12, 32 9 C33.5 12, 33.5 15, 32 18 Z" fill="#dfb559" stroke="#c5a059" strokeWidth="1" />
                 </svg>
               </div>
-              <span className="font-serif text-[8px] sm:text-[10px] md:text-[11px] font-bold text-[#1B365D] uppercase tracking-[0.12em] leading-tight">
+              <span className="font-serif text-[8px] sm:text-[9.5px] md:text-[10.5px] font-bold text-[#132742] uppercase tracking-[0.08em] leading-tight drop-shadow-[0_0.5px_0.5px_rgba(255,255,255,0.9)]">
                 {lang === "es" ? "SU PRIMER CUMPLEAÑOS" : "HIS FIRST BIRTHDAY"}
               </span>
             </div>

@@ -10,6 +10,7 @@ import {
   Feather,
   Clock
 } from "lucide-react";
+import PageFloralFrame from "./PageFloralFrame";
 import { useLanguage } from "../hooks/useLanguage";
 
 interface Signature {
@@ -135,15 +136,14 @@ export default function GuestBook() {
   };
 
   return (
-    <section id="libro-firmas" className="relative py-24 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden text-[#1B365D]">
+    <section className="relative min-h-[100svh] w-full py-12 sm:py-16 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden text-[#1B365D] flex flex-col justify-center items-center">
+      {/* Floral Frame */}
+      <PageFloralFrame variant="light" showBottomRight={true} />
+
       {/* Soft Ambient Radiance */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none" />
 
-      {/* Decorative Borders */}
-      <div className="absolute top-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/40 to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/40 to-transparent" />
-
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-4xl w-full mx-auto relative z-10 my-auto">
         {/* Header Title Block with soft animations */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

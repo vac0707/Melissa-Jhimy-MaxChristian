@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import PageFloralFrame from "./PageFloralFrame";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function Schedule() {
@@ -179,12 +180,11 @@ export default function Schedule() {
   ];
 
   return (
-    <section id="itinerario" className="relative py-28 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden">
-      {/* Soft gradient divider lines at boundaries */}
-      <div className="absolute top-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/40 to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/40 to-transparent" />
+    <section className="relative min-h-[100svh] py-14 sm:py-18 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden flex flex-col justify-center items-center">
+      {/* Floral Frame */}
+      <PageFloralFrame variant="light" showBottomRight={true} />
 
-      <div className="max-w-2xl mx-auto relative z-10">
+      <div className="max-w-2xl w-full mx-auto relative z-10 my-auto">
         
         {/* Title "Itinerario" in Calligraphy Script */}
         <div className="text-center mb-20">
