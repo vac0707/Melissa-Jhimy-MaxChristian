@@ -45,7 +45,7 @@ export default function LogoIntro({ onComplete }: LogoIntroProps) {
           className="relative max-w-[280px] sm:max-w-[340px] w-full aspect-square flex items-center justify-center filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
         >
           <img
-            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787087671/log.png"
+            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787091649/LOGP_PF.png"
             alt="Sello Oficial Melissa, Jhimy & Max Christian"
             className="w-full h-full object-contain pointer-events-none select-none"
             referrerPolicy="no-referrer"

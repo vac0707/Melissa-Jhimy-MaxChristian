@@ -71,7 +71,7 @@ export default function FinalPage() {
           className="w-24 sm:w-28 h-auto mb-3 opacity-95 filter drop-shadow-md"
         >
           <img
-            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787087671/log.png"
+            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787091649/LOGP_PF.png"
             alt="Logo Melissa & Jhimy"
             className="w-full h-full object-contain"
             referrerPolicy="no-referrer"
