@@ -193,7 +193,7 @@ export default function PageTurnContainer({
 
       {/* Main 3D Animated Page Screen */}
       <main className="relative w-full min-h-[100svh] flex flex-col justify-center items-center">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+        <AnimatePresence initial={true} custom={direction} mode="wait">
           <motion.div
             key={activePage?.id || currentPage}
             custom={direction}

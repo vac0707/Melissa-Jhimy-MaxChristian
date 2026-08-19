@@ -24,8 +24,7 @@ import RSVPPage from "./components/RSVPPage";
 import FinalPage from "./components/FinalPage";
 
 export default function App() {
-  const [unlocked, setUnlocked] = useState(false);
-  const [showLogoIntro, setShowLogoIntro] = useState(false);
+  const [appStage, setAppStage] = useState<"envelope" | "logo" | "book">("envelope");
   const [currentPage, setCurrentPage] = useState(0);
   const [isAlbumUploaderOpen, setIsAlbumUploaderOpen] = useState(false);
 
@@ -36,19 +35,17 @@ export default function App() {
     const hash = window.location.hash;
 
     if (searchParams.get("view") === "album" || hash === "#album-upload" || hash === "#album-subir") {
-      setUnlocked(true);
-      setShowLogoIntro(false);
+      setAppStage("book");
       setIsAlbumUploaderOpen(true);
     }
   }, []);
 
   const handleUnlock = () => {
-    setUnlocked(true);
-    setShowLogoIntro(true);
+    setAppStage("logo");
   };
 
   const handleLogoIntroComplete = () => {
-    setShowLogoIntro(false);
+    setAppStage("book");
     setCurrentPage(0);
   };
 
@@ -171,81 +168,86 @@ export default function App() {
 
   return (
     <div className="relative min-h-[100svh] w-full bg-[#11223B] overflow-x-hidden select-none">
-      {/* 1. Envelope Welcome Curtain */}
+      {/* Persistent Background Music Controller (Active once envelope is opened) */}
+      <AudioPlayer systemUnlocked={appStage !== "envelope"} />
+
+      {/* Unified sequential stage transitions */}
       <AnimatePresence mode="wait">
-        {!unlocked && (
+        {/* 1. Envelope Welcome Curtain */}
+        {appStage === "envelope" && (
           <motion.div
             key="welcome-curtain"
             initial={{ opacity: 1 }}
             exit={{
               opacity: 0,
-              scale: 1.05,
-              transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+              scale: 1.04,
+              transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
             }}
             className="fixed inset-0 z-50 overflow-hidden"
           >
             <WelcomeScreen onOpen={handleUnlock} />
           </motion.div>
         )}
-      </AnimatePresence>
 
-      {/* 2. Logo Cinematic Intro (Plays briefly after envelope) */}
-      <AnimatePresence mode="wait">
-        {unlocked && showLogoIntro && (
+        {/* 2. Logo Cinematic Intro (Plays briefly after envelope, finishes completely before book mounts) */}
+        {appStage === "logo" && (
           <motion.div
             key="logo-intro-curtain"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
             className="fixed inset-0 z-50 overflow-hidden"
           >
             <LogoIntro onComplete={handleLogoIntroComplete} />
           </motion.div>
         )}
+
+        {/* 3. Main Digital Book Experience (Mounts ONLY after Logo finishes completely) */}
+        {appStage === "book" && (
+          <motion.div
+            key="main-book-stage"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative w-full min-h-[100svh]"
+          >
+            {/* Subtle Ambient Falling Leaves */}
+            <FloatingLeaves />
+
+            {/* VIEW: EITHER COLLABORATIVE UPLOADER OR DIGITAL BOOK */}
+            <AnimatePresence mode="wait">
+              {isAlbumUploaderOpen ? (
+                <motion.div
+                  key="uploader-view"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full min-h-[100svh]"
+                >
+                  <CollaborativeAlbumUploader onBackToInvitation={handleCloseUploader} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="book-view"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full min-h-[100svh]"
+                >
+                  <PageTurnContainer
+                    pages={bookPages}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </AnimatePresence>
-
-      {/* 3. Main Experience when Unlocked */}
-      {unlocked && !showLogoIntro && (
-        <div className="relative w-full min-h-[100svh]">
-          {/* Subtle Ambient Falling Leaves */}
-          <FloatingLeaves />
-
-          {/* Persistent Background Music Controller */}
-          <AudioPlayer systemUnlocked={unlocked} />
-
-          {/* VIEW: EITHER COLLABORATIVE UPLOADER OR DIGITAL BOOK */}
-          <AnimatePresence mode="wait">
-            {isAlbumUploaderOpen ? (
-              <motion.div
-                key="uploader-view"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.5 }}
-                className="w-full min-h-[100svh]"
-              >
-                <CollaborativeAlbumUploader onBackToInvitation={handleCloseUploader} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="book-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-                className="w-full min-h-[100svh]"
-              >
-                <PageTurnContainer
-                  pages={bookPages}
-                  currentPage={currentPage}
-                  onPageChange={setCurrentPage}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
     </div>
   );
 }

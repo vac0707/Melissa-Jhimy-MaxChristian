@@ -63,12 +63,11 @@ export default function Hero({ onNextPage }: HeroProps) {
           referrerPolicy="no-referrer"
         />
 
-        {/* TOP-RIGHT INVITATION TEXT BLOCK (Refined typography & hierarchy) */}
+        {/* TOP-RIGHT INVITATION TEXT BLOCK (Refined typography & smooth entrance) */}
         <motion.div
-          initial={{ opacity: 0, x: 15 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.2 }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
           className="absolute top-[13.5%] sm:top-[14.5%] right-[2.5%] sm:right-[3.5%] w-[41%] sm:w-[38%] max-w-[195px] flex flex-col items-center text-center z-10 select-none"
         >
           {/* Subtitle 1: CON INMENSA */}
@@ -100,10 +99,9 @@ export default function Hero({ onNextPage }: HeroProps) {
         <div className="absolute top-[48.5%] sm:top-[49.5%] inset-x-0 flex flex-col items-center text-center px-3 sm:px-4 z-10 select-none">
           {/* Couple Names: Melissa & Jhimy (Refined, elegant & romantic calligraphy) */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.3 }}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.5, ease: "easeOut" }}
             className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap"
           >
             <h1 className="font-great-vibes text-[42px] sm:text-[56px] md:text-[64px] text-[#132742] leading-tight select-none tracking-normal font-normal drop-shadow-[0_1.5px_3px_rgba(19,39,66,0.18)]">
@@ -122,35 +120,41 @@ export default function Hero({ onNextPage }: HeroProps) {
             </svg>
           </motion.div>
 
-          <div className="text-[#dfb559] text-[9px] sm:text-xs -mt-1 mb-1">
-            ♥
-          </div>
-
-          <span className="font-serif text-[8.5px] sm:text-[10px] md:text-[11px] tracking-[0.26em] text-[#1B365D] uppercase font-bold block mb-0.5">
-            {lang === "es" ? "JUNTO A NUESTRO HIJO" : "TOGETHER WITH OUR SON"}
-          </span>
-
-          <h2 className="font-serif text-[22px] sm:text-[28px] md:text-[34px] text-[#b88c38] font-bold tracking-[0.18em] uppercase select-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-            MAX CHRISTIAN
-          </h2>
-
-          {/* ORNAMENTAL DIVIDER */}
-          <div className="w-[75%] sm:w-[70%] flex items-center justify-center gap-2 my-1.5 sm:my-2">
-            <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#dfb559]/70 to-[#dfb559]" />
-            <div className="flex items-center gap-1 text-[#dfb559]">
-              <span className="text-[8px] sm:text-[10px]">♦</span>
-              <span className="text-xs sm:text-sm font-serif">❧</span>
-              <span className="text-[8px] sm:text-[10px]">♦</span>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.75, ease: "easeOut" }}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="text-[#dfb559] text-[9px] sm:text-xs -mt-1 mb-1">
+              ♥
             </div>
-            <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent via-[#dfb559]/70 to-[#dfb559]" />
-          </div>
+
+            <span className="font-serif text-[8.5px] sm:text-[10px] md:text-[11px] tracking-[0.26em] text-[#1B365D] uppercase font-bold block mb-0.5">
+              {lang === "es" ? "JUNTO A NUESTRO HIJO" : "TOGETHER WITH OUR SON"}
+            </span>
+
+            <h2 className="font-serif text-[22px] sm:text-[28px] md:text-[34px] text-[#b88c38] font-bold tracking-[0.18em] uppercase select-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+              MAX CHRISTIAN
+            </h2>
+
+            {/* ORNAMENTAL DIVIDER */}
+            <div className="w-[75%] sm:w-[70%] flex items-center justify-center gap-2 my-1.5 sm:my-2">
+              <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#dfb559]/70 to-[#dfb559]" />
+              <div className="flex items-center gap-1 text-[#dfb559]">
+                <span className="text-[8px] sm:text-[10px]">♦</span>
+                <span className="text-xs sm:text-sm font-serif">❧</span>
+                <span className="text-[8px] sm:text-[10px]">♦</span>
+              </div>
+              <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent via-[#dfb559]/70 to-[#dfb559]" />
+            </div>
+          </motion.div>
 
           {/* THREE PILLARS (Enhanced with subtle parchment base for maximum contrast & legibility) */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.4 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 1.0, ease: "easeOut" }}
             className="w-[94%] max-w-[420px] bg-[#FAF6F0]/92 backdrop-blur-[2px] rounded-xl border border-[#dfb559]/35 px-2 sm:px-3 py-2 sm:py-2.5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] grid grid-cols-3 gap-1 text-center mt-1 z-10"
           >
             {/* PILLAR 1 */}
