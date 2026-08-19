@@ -47,7 +47,7 @@ export default function RSVPPage() {
 
       <div className="max-w-xl w-full mx-auto relative z-10 my-auto">
         {/* Header Title Block */}
-        <div className="text-center mb-6 sm:mb-8">
+        <div className="text-center mb-5 sm:mb-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,15 +61,21 @@ export default function RSVPPage() {
               <Sparkles className="w-3.5 h-3.5 text-[#c5a059]" />
             </div>
 
-            <h2 className="font-great-vibes text-4.5xl sm:text-6.5xl text-[#1B365D] leading-none mb-2 select-none font-normal">
+            <h2 className="font-great-vibes text-4.5xl sm:text-6.5xl text-[#1B365D] leading-none mb-3 select-none font-normal">
               {lang === "es" ? "Confirma tu Asistencia" : "Confirm Attendance"}
             </h2>
 
-            <p className="text-[#1B365D]/80 text-xs sm:text-sm font-serif italic max-w-sm leading-relaxed">
-              {lang === "es"
-                ? "Tu presencia hará que este día sea aún más especial."
-                : "Your presence will make this day truly special."}
-            </p>
+            {/* UN MENSAJE PARA TI */}
+            <div className="max-w-md w-full mx-auto px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl bg-white/85 border border-[#dfb559]/50 shadow-sm mb-2">
+              <span className="block text-[10px] sm:text-[11px] font-sans font-bold text-[#c5a059] uppercase tracking-[0.25em] mb-1">
+                {lang === "es" ? "UN MENSAJE PARA TI" : "A MESSAGE FOR YOU"}
+              </span>
+              <p className="text-[#1B365D] text-[13px] sm:text-[14.5px] font-serif italic leading-relaxed font-medium">
+                “{lang === "es"
+                  ? "Estamos muy emocionados de compartir este día tan importante con las personas que más queremos."
+                  : "We are truly excited to share this meaningful day with the people we love most."}”
+              </p>
+            </div>
 
             <div className="w-16 h-[0.5px] bg-[#dfb559]/50 mt-2" />
           </motion.div>

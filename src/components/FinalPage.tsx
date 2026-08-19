@@ -37,7 +37,7 @@ export default function FinalPage() {
     : "Hello! I saw the beautiful wedding invitation design and I would like to quote a virtual invitation or graphic design services.";
 
   return (
-    <section className="relative min-h-[100svh] w-full py-12 sm:py-16 px-4 sm:px-6 bg-[#11223B] text-white overflow-hidden flex flex-col justify-between items-center select-none">
+    <section className="relative min-h-[100svh] w-full py-10 sm:py-14 px-3 sm:px-6 bg-[#11223B] text-white overflow-hidden flex flex-col justify-between items-center select-none">
       {/* Floral frame in dark theme */}
       <PageFloralFrame variant="dark" showBottomRight={true} />
 
@@ -45,37 +45,49 @@ export default function FinalPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(223,181,89,0.15)_0%,rgba(17,34,59,1)_80%)] pointer-events-none" />
 
       <div className="max-w-2xl w-full mx-auto text-center relative z-10 flex flex-col items-center my-auto">
-        {/* Family Final Photo */}
+        {/* Family Final Photo - Large, Uncropped Full View */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 15 }}
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-[#dfb559] shadow-2xl mb-5 bg-[#132742] group"
+          className="relative w-full max-w-lg aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden shadow-2xl mb-5 bg-[#0a1523] group"
         >
+          {/* Ambient blurred backdrop behind photo for seamless display */}
+          <img
+            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787082602/05.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover blur-lg scale-110 opacity-30 pointer-events-none"
+            referrerPolicy="no-referrer"
+          />
+
+          {/* Full uncropped high-resolution photo */}
           <img
             src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787082602/05.jpg"
             alt="Melissa, Jhimy y Max Christian"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="relative z-[1] w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-102"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 ring-1 ring-inset ring-[#dfb559]/30 rounded-full pointer-events-none" />
+
+          <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-2xl pointer-events-none z-[2]" />
         </motion.div>
 
-        {/* Small Official Logo */}
+        {/* Official Logo with high-contrast IVORY background */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="w-24 sm:w-28 h-auto mb-3 opacity-95 filter drop-shadow-md"
+          className="mb-4"
         >
-          <img
-            src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787091649/LOGP_PF.png"
-            alt="Logo Melissa & Jhimy"
-            className="w-full h-full object-contain"
-            referrerPolicy="no-referrer"
-          />
+          <div className="px-5 py-2.5 rounded-2xl bg-[#FAF6F0] border border-[#dfb559]/60 shadow-[0_8px_25px_rgba(0,0,0,0.4)] inline-flex items-center justify-center">
+            <img
+              src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787091649/LOGP_PF.png"
+              alt="Logo Melissa & Jhimy"
+              className="w-24 sm:w-28 h-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
         </motion.div>
 
         {/* Heart icon */}
@@ -89,11 +101,12 @@ export default function FinalPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-serif text-[15px] sm:text-lg font-light text-[#FAF6F0] tracking-wide max-w-lg mb-3 leading-relaxed italic px-2"
         >
-          “Gracias por ser parte de nuestra historia, de nuestro amor y de este nuevo capítulo como familia.”
+          “Gracias por ser parte de nuestra historia y por acompañarnos en este nuevo capitulo de nuestras vidas.”
         </motion.p>
 
-        <p className="text-[#dfb559] text-[11px] sm:text-xs tracking-[0.25em] font-bold uppercase mb-5">
-          Melissa & Jhimy • Max Christian — 7 de Setiembre 2026
+        {/* Con cariño signature */}
+        <p className="text-[#dfb559] text-[12px] sm:text-[13.5px] tracking-[0.2em] font-serif font-bold uppercase mb-5">
+          Con cariño, Melissa, Jhimy y Max Christian.
         </p>
 
         {/* Share Invitation Button */}
@@ -122,7 +135,7 @@ export default function FinalPage() {
 
         {/* Location subtitle */}
         <p className="text-[9.5px] text-gray-300 uppercase tracking-[0.25em] font-light mb-4">
-          Abancay, Perú | Todos los derechos reservados © 2026
+          7 de Setiembre 2026 • Abancay, Perú | Todos los derechos reservados © 2026
         </p>
 
         {/* Designer Credits */}
