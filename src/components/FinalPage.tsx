@@ -104,10 +104,15 @@ export default function FinalPage() {
           “Gracias por ser parte de nuestra historia y por acompañarnos en este nuevo capitulo de nuestras vidas.”
         </motion.p>
 
-        {/* Con cariño signature */}
-        <p className="text-[#dfb559] text-[12px] sm:text-[13.5px] tracking-[0.2em] font-serif font-bold uppercase mb-5">
-          Con cariño, Melissa, Jhimy y Max Christian.
-        </p>
+        {/* Con cariño signature (separated in 2 distinct lines) */}
+        <div className="mb-5 flex flex-col items-center gap-1">
+          <p className="text-[#c5a059] text-[13px] sm:text-[15px] font-serif italic tracking-wider">
+            Con cariño,
+          </p>
+          <p className="text-[#dfb559] text-[12.5px] sm:text-[14px] tracking-[0.22em] font-serif font-bold uppercase">
+            Melissa, Jhimy y Max Christian
+          </p>
+        </div>
 
         {/* Share Invitation Button */}
         <div className="mb-6">

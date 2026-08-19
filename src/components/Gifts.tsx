@@ -23,9 +23,9 @@ export default function Gifts() {
     {
       owner: "Jhimy Camacho & Melissa Retamoso",
       items: [
-        { label: "Yape / Plin", value: "966 740 525" },
-        { label: "BCP Soles", value: "200 901 599 360 22" },
-        { label: "CCI Interbancaria", value: "002 200 1901 599360 2247" }
+        { label: "Yape / Plin", value: "980 852 503" },
+        { label: "BCP Soles", value: "20096500288018" },
+        { label: "CCI Interbancaria", value: "00220019650028801848" }
       ]
     }
   ];
