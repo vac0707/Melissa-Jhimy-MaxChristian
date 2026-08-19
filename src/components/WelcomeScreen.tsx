@@ -111,7 +111,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
           >
             {/* Real high resolution Closed Envelope */}
             <img
-              src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786934334/CERRADO.png"
+              src="https://res.cloudinary.com/lfwlqotz/image/upload/v1787147348/CERRADO1.png"
               alt="Sobre cerrado de matrimonio"
               className="w-full h-full object-contain drop-shadow-2xl pointer-events-none select-none"
               referrerPolicy="no-referrer"
