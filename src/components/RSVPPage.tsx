@@ -58,8 +58,8 @@ export default function RSVPPage() {
           {/* Description - Increased font size for easy reading on mobile */}
           <p className="font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] italic max-w-md leading-relaxed font-medium px-4">
             {lang === "es"
-              ? "Por favor confírmanos antes del 20 de Agosto del 2026 para reservar tu lugar en este día tan especial."
-              : "Please RSVP before August 20, 2026 to save your seat on this special day."}
+              ? "Por favor confírmanos hasta el 31 de Agosto del 2026 para reservar tu lugar en este día tan especial."
+              : "Please RSVP until August 31, 2026 to save your seat on this special day."}
           </p>
         </motion.div>
 
