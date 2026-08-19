@@ -147,7 +147,7 @@ export default function FamilyTribute() {
             <Church className="w-3.5 h-3.5 text-[#c5a059]" />
           </div>
 
-          <h3 className="font-great-vibes text-5.5xl sm:text-7xl text-[#1B365D] mb-3 leading-none select-none font-normal">
+          <h3 className="font-great-vibes text-7xl text-[#1B365D] mb-3 leading-none select-none font-normal">
             Max Christian
           </h3>
 
