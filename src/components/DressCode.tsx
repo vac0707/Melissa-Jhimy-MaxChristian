@@ -47,7 +47,7 @@ export default function DressCode() {
           </svg>
         </motion.div>
 
-        {/* Informative Text Block in luxurious layout */}
+        {/* Informative Text Block */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,28 +56,28 @@ export default function DressCode() {
           className="w-full text-center flex flex-col items-center"
         >
           {/* Etiquette Tag */}
-          <span className="font-sans text-[11px] sm:text-[12.5px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1.5">
+          <span className="font-sans text-[12px] sm:text-[13.5px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1.5">
             {t("dress_code.etiquette", "Etiqueta")}
           </span>
 
-          {/* Header Title with exact same grand calligraphy size */}
+          {/* Header Title */}
           <h3 className="font-great-vibes text-[50px] sm:text-[68px] md:text-[76px] text-[#1B365D] tracking-wide mb-2 select-none leading-[1.1] font-normal">
             {t("dress_code.title", "Código de Vestimenta")}
           </h3>
 
           {/* Subheading */}
-          <span className="font-serif text-[15px] sm:text-[17px] text-[#1B365D] font-bold uppercase tracking-[0.2em] text-center max-w-sm px-4 leading-snug">
+          <span className="font-serif text-[17px] sm:text-[19px] text-[#1B365D] font-bold uppercase tracking-[0.2em] text-center max-w-sm px-4 leading-snug">
             {lang === "es" ? "Formal / Elegante" : "Formal / Elegant Attire"}
           </span>
 
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mx-auto mt-4 mb-4" />
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mx-auto mt-3.5 mb-4" />
 
-          {/* Body description card */}
-          <div className="bg-white/90 border border-[#dfb559]/35 rounded-2xl p-5 sm:p-7 max-w-md w-full shadow-sm space-y-3 font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 font-medium tracking-wide leading-relaxed">
+          {/* Body description card - Enlarged font for easy reading */}
+          <div className="bg-white/95 border border-[#dfb559]/35 rounded-2xl p-5 sm:p-7 max-w-md w-full shadow-sm space-y-3.5 font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] font-medium tracking-wide leading-relaxed">
             <p>
               {lang === "es" ? "Mujeres: Vestidos largos (Evitar el color blanco / marfil reservado para la novia)." : "Women: Formal long dresses (Please avoid white/ivory reserved for the bride)."}
             </p>
-            <div className="w-full h-[0.5px] bg-[#dfb559]/20" />
+            <div className="w-full h-[0.5px] bg-[#dfb559]/25" />
             <p>
               {lang === "es" ? "Hombres: Traje formal elegante / terno." : "Men: Formal suit / elegant attire."}
             </p>

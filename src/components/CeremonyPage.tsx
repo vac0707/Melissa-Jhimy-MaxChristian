@@ -21,14 +21,14 @@ export default function CeremonyPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="flex flex-col items-center mb-6"
+          className="flex flex-col items-center mb-5 sm:mb-6"
         >
           {/* Vector Church Line Icon */}
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#132742] border-2 border-[#dfb559] flex items-center justify-center text-[#dfb559] mb-3 shadow-lg">
             <Church className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
 
-          <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.25em] uppercase font-bold text-[#c5a059] mb-1">
+          <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.25em] uppercase font-bold text-[#c5a059] mb-1">
             {lang === "es" ? "Ceremonia Religiosa" : "Religious Ceremony"}
           </span>
 
@@ -36,10 +36,10 @@ export default function CeremonyPage() {
             {lang === "es" ? "Misa de Matrimonio y Bautizo" : "Wedding & Baptism Mass"}
           </h2>
 
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/50 mt-1 mb-4" />
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/50 mt-1 mb-3.5" />
 
-          {/* Emotional Phrase */}
-          <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 italic max-w-lg leading-relaxed font-medium px-4">
+          {/* Emotional Phrase - Increased text size and readability */}
+          <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] italic max-w-lg leading-relaxed font-medium px-4">
             “Acompáñanos en este momento tan especial donde unimos nuestras vidas ante Dios y presentamos a nuestro hijo en su bautizo.”
           </p>
         </motion.div>
@@ -50,40 +50,40 @@ export default function CeremonyPage() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="w-full max-w-md bg-white/90 rounded-2xl p-6 sm:p-7 border border-[#dfb559]/40 shadow-sm relative overflow-hidden"
+          className="w-full max-w-md bg-white/95 rounded-2xl p-6 sm:p-7 border border-[#dfb559]/40 shadow-sm relative overflow-hidden"
         >
           {/* Location & Time Rows */}
           <div className="space-y-4 text-center">
             {/* Time */}
             <div className="flex flex-col items-center">
-              <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
+              <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1.5">
                 <Clock className="w-4 h-4" />
-                <span className="text-[11.5px] sm:text-[12.5px] uppercase tracking-widest font-bold">
+                <span className="text-[12px] sm:text-[13px] uppercase tracking-widest font-bold font-sans">
                   {lang === "es" ? "Hora Exacta" : "Exact Time"}
                 </span>
               </div>
-              <p className="font-serif text-2xl sm:text-2.5xl font-bold text-[#1B365D]">
+              <p className="font-serif text-2xl sm:text-3xl font-bold text-[#1B365D]">
                 02:00 PM
               </p>
-              <span className="text-[12px] sm:text-[13px] text-[#1B365D]/75 font-sans tracking-wide">
+              <span className="text-[13.5px] sm:text-[15px] text-[#1B365D]/85 font-sans tracking-wide mt-0.5">
                 {lang === "es" ? "Lunes, 7 de Setiembre del 2026" : "Monday, September 7, 2026"}
               </span>
             </div>
 
-            <div className="w-full h-[0.5px] bg-[#dfb559]/20" />
+            <div className="w-full h-[0.5px] bg-[#dfb559]/25" />
 
             {/* Place */}
             <div className="flex flex-col items-center">
               <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
                 <MapPin className="w-4 h-4" />
-                <span className="text-[11.5px] sm:text-[12.5px] uppercase tracking-widest font-bold">
+                <span className="text-[12px] sm:text-[13px] uppercase tracking-widest font-bold font-sans">
                   {lang === "es" ? "Lugar Sagrado" : "Sacred Venue"}
                 </span>
               </div>
-              <p className="font-serif text-xl sm:text-2xl font-bold text-[#1B365D]">
+              <p className="font-serif text-2xl sm:text-2.5xl font-bold text-[#1B365D]">
                 Catedral de Abancay
               </p>
-              <span className="text-[13px] sm:text-[14px] text-[#1B365D]/80 font-serif italic">
+              <span className="text-[14.5px] sm:text-[16px] text-[#1B365D]/85 font-serif italic mt-0.5">
                 Plaza Mayor de Abancay, Apurímac
               </span>
             </div>
@@ -94,20 +94,20 @@ export default function CeremonyPage() {
                 href={churchMapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#132742] hover:bg-[#1B365D] text-[#dfb559] border border-[#dfb559]/40 text-xs sm:text-[13px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                className="flex-1 py-3 px-4 rounded-xl bg-[#132742] hover:bg-[#1B365D] text-[#dfb559] border border-[#dfb559]/40 text-[12.5px] sm:text-[13.5px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
-                <MapPin className="w-3.5 h-3.5" />
+                <MapPin className="w-4 h-4" />
                 <span>{lang === "es" ? "Ver Ubicación" : "View Map"}</span>
-                <ExternalLink className="w-3 h-3 opacity-70" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-75" />
               </a>
 
               <a
                 href={churchCalendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/50 text-xs sm:text-[13px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                className="flex-1 py-3 px-4 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/50 text-[12.5px] sm:text-[13.5px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
-                <Calendar className="w-3.5 h-3.5 text-[#c5a059]" />
+                <Calendar className="w-4 h-4 text-[#c5a059]" />
                 <span>{lang === "es" ? "Agendar" : "Add Calendar"}</span>
               </a>
             </div>

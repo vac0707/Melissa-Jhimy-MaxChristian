@@ -61,7 +61,7 @@ export default function CountdownPage() {
         >
           <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
             <Clock className="w-3.5 h-3.5" />
-            <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.25em] uppercase font-bold text-[#c5a059]">
+            <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.25em] uppercase font-bold text-[#c5a059]">
               {lang === "es" ? "Cada segundo cuenta" : "Every second counts"}
             </span>
           </div>
@@ -86,7 +86,7 @@ export default function CountdownPage() {
               <span className="font-sans text-3.5xl sm:text-4.5xl font-light tracking-tight select-none leading-none">
                 {padZero(timeLeft.days)}
               </span>
-              <span className="text-[10.5px] sm:text-[11.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
+              <span className="text-[11px] sm:text-[12.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
                 {lang === "es" ? "DÍAS" : "DAYS"}
               </span>
             </div>
@@ -101,7 +101,7 @@ export default function CountdownPage() {
               <span className="font-sans text-3.5xl sm:text-4.5xl font-light tracking-tight select-none leading-none">
                 {padZero(timeLeft.hours)}
               </span>
-              <span className="text-[10.5px] sm:text-[11.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
+              <span className="text-[11px] sm:text-[12.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
                 {lang === "es" ? "HORAS" : "HOURS"}
               </span>
             </div>
@@ -116,7 +116,7 @@ export default function CountdownPage() {
               <span className="font-sans text-3.5xl sm:text-4.5xl font-light tracking-tight select-none leading-none">
                 {padZero(timeLeft.minutes)}
               </span>
-              <span className="text-[10.5px] sm:text-[11.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
+              <span className="text-[11px] sm:text-[12.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
                 {lang === "es" ? "MIN" : "MIN"}
               </span>
             </div>
@@ -131,7 +131,7 @@ export default function CountdownPage() {
               <span className="font-sans text-3.5xl sm:text-4.5xl font-light tracking-tight text-[#dfb559] select-none leading-none">
                 {padZero(timeLeft.seconds)}
               </span>
-              <span className="text-[10.5px] sm:text-[11.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
+              <span className="text-[11px] sm:text-[12.5px] tracking-[0.2em] text-[#dfb559] uppercase mt-2 font-bold">
                 {lang === "es" ? "SEG" : "SEC"}
               </span>
             </div>
@@ -148,13 +148,13 @@ export default function CountdownPage() {
         >
           {/* Month Header */}
           <div className="text-center mb-3">
-            <h4 className="font-serif text-[15.5px] sm:text-[17px] text-[#1B365D] tracking-[0.2em] font-bold uppercase">
+            <h4 className="font-serif text-[16px] sm:text-[18px] text-[#1B365D] tracking-[0.2em] font-bold uppercase">
               {lang === "es" ? "SETIEMBRE 2026" : "SEPTEMBER 2026"}
             </h4>
           </div>
 
           {/* Calendar Grid */}
-          <div className="grid grid-cols-7 gap-1 text-center relative z-20 text-[12px] sm:text-[13px]">
+          <div className="grid grid-cols-7 gap-1 text-center relative z-20 text-[12.5px] sm:text-[13.5px]">
             {/* Weekdays Header */}
             {(lang === "es"
               ? ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"]
@@ -162,7 +162,7 @@ export default function CountdownPage() {
             ).map((day, idx) => (
               <span
                 key={idx}
-                className="font-great-vibes text-[17px] text-[#c5a059] pb-1 font-semibold"
+                className="font-great-vibes text-[18px] text-[#c5a059] pb-1 font-semibold"
               >
                 {day}
               </span>
@@ -218,7 +218,7 @@ export default function CountdownPage() {
                       </svg>
                     </div>
 
-                    <span className="relative z-10 text-[11px] font-extrabold text-[#FAF6F0] leading-none">
+                    <span className="relative z-10 text-[11.5px] font-extrabold text-[#FAF6F0] leading-none">
                       7
                     </span>
                   </div>
@@ -228,7 +228,7 @@ export default function CountdownPage() {
               return (
                 <div
                   key={idx}
-                  className="aspect-square flex items-center justify-center rounded-full text-[13px] font-serif text-[#1B365D]/85 font-medium"
+                  className="aspect-square flex items-center justify-center rounded-full text-[13.5px] font-serif text-[#1B365D]/85 font-medium"
                 >
                   <span>{item.day}</span>
                 </div>
@@ -238,10 +238,10 @@ export default function CountdownPage() {
 
           {/* Calendar Footer */}
           <div className="mt-3 pt-2.5 border-t border-[#dfb559]/30 text-center">
-            <p className="font-serif text-[14px] sm:text-[15.5px] font-bold tracking-wide text-[#1B365D]">
+            <p className="font-serif text-[15px] sm:text-[16.5px] font-bold tracking-wide text-[#1B365D]">
               {lang === "es" ? "Lunes, 7 de Setiembre • 02:00 PM" : "Monday, September 7 • 02:00 PM"}
             </p>
-            <p className="text-[10.5px] text-[#c5a059] uppercase tracking-[0.25em] font-bold mt-0.5 inline-flex items-center gap-1">
+            <p className="text-[11.5px] sm:text-[12px] text-[#c5a059] uppercase tracking-[0.25em] font-bold mt-0.5 inline-flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-[#dfb559]" />
               <span>Catedral de Abancay</span>
             </p>

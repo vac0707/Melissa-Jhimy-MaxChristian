@@ -48,7 +48,7 @@ export default function OurStoryPage() {
         >
           <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1.5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.3em] uppercase font-bold text-[#c5a059]">
+            <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.3em] uppercase font-bold text-[#c5a059]">
               {lang === "es" ? "Capítulo I" : "Chapter I"}
             </span>
             <Sparkles className="w-3.5 h-3.5" />
@@ -58,14 +58,15 @@ export default function OurStoryPage() {
             {lang === "es" ? "Nuestra Historia" : "Our Story"}
           </h2>
 
-          <p className="font-serif text-[13.5px] sm:text-[15px] text-[#1B365D]/85 italic tracking-wider font-normal">
+          {/* Subtitle phrase with enlarged, comfortable reading size */}
+          <p className="font-serif text-[16px] sm:text-[18px] text-[#1B365D] italic tracking-wide font-normal mt-0.5">
             {lang === "es" ? "Cada momento nos trajo hasta aquí" : "Every moment brought us here"}
           </p>
 
-          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#dfb559]/60 to-transparent mt-3" />
+          <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-[#dfb559]/60 to-transparent mt-3.5" />
         </motion.div>
 
-        {/* 4 Photos Grid (2x2 on desktop/tablet, elegant balanced 2x2 grid on mobile) */}
+        {/* 4 Photos Grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 w-full max-w-2xl px-1 sm:px-2">
           {STORY_PHOTOS.map((photo, index) => (
             <motion.div
@@ -90,7 +91,7 @@ export default function OurStoryPage() {
           ))}
         </div>
 
-        {/* Romantic Bottom Text */}
+        {/* Romantic Bottom Text - Enlarged for great readability on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -98,13 +99,13 @@ export default function OurStoryPage() {
           transition={{ duration: 0.9, delay: 0.4 }}
           className="mt-6 sm:mt-8 text-center max-w-xl px-4"
         >
-          <div className="flex items-center justify-center gap-2 mb-2 text-[#dfb559]">
-            <div className="w-8 h-[0.5px] bg-[#dfb559]/50" />
-            <Heart className="w-3.5 h-3.5 fill-[#dfb559] text-[#dfb559]" />
-            <div className="w-8 h-[0.5px] bg-[#dfb559]/50" />
+          <div className="flex items-center justify-center gap-2 mb-2.5 text-[#dfb559]">
+            <div className="w-10 h-[0.5px] bg-[#dfb559]/50" />
+            <Heart className="w-4 h-4 fill-[#dfb559] text-[#dfb559]" />
+            <div className="w-10 h-[0.5px] bg-[#dfb559]/50" />
           </div>
 
-          <p className="font-serif text-[15px] sm:text-[16.5px] md:text-[17px] text-[#1B365D] font-medium leading-relaxed italic">
+          <p className="font-serif text-[17px] sm:text-[18.5px] md:text-[20px] text-[#1B365D] font-medium leading-relaxed italic">
             “El amor nos unió, Dios bendijo nuestro hogar y nuestra historia encontró su mayor regalo en nuestro hijo Max Christian.”
           </p>
         </motion.div>

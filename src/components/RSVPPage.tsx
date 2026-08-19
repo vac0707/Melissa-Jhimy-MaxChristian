@@ -39,13 +39,13 @@ export default function RSVPPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-6 flex flex-col items-center"
+          className="text-center mb-5 sm:mb-6 flex flex-col items-center"
         >
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#132742] border-2 border-[#dfb559] flex items-center justify-center text-[#dfb559] mb-3 shadow-lg select-none">
             <UserCheck className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
 
-          <span className="font-sans text-[11px] sm:text-[12.5px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1">
+          <span className="font-sans text-[12px] sm:text-[13px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1">
             {lang === "es" ? "Pase de Asistencia" : "RSVP"}
           </span>
 
@@ -53,9 +53,10 @@ export default function RSVPPage() {
             {lang === "es" ? "Confirma tu Asistencia" : "Confirm Attendance"}
           </h2>
 
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-4" />
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-3.5" />
 
-          <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 italic max-w-md leading-relaxed font-medium px-4">
+          {/* Description - Increased font size for easy reading on mobile */}
+          <p className="font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] italic max-w-md leading-relaxed font-medium px-4">
             {lang === "es"
               ? "Por favor confírmanos antes del 20 de Agosto del 2026 para reservar tu lugar en este día tan especial."
               : "Please RSVP before August 20, 2026 to save your seat on this special day."}
@@ -68,22 +69,22 @@ export default function RSVPPage() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="w-full bg-white/90 rounded-2xl p-5 sm:p-7 border border-[#dfb559]/40 shadow-sm relative overflow-hidden"
+          className="w-full bg-white/95 rounded-2xl p-5 sm:p-7 border border-[#dfb559]/40 shadow-sm relative overflow-hidden"
         >
           {isSuccess ? (
             <div className="text-center py-8 space-y-3">
               <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto animate-bounce" />
-              <h3 className="font-serif text-2xl font-bold text-[#1B365D]">
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1B365D]">
                 {lang === "es" ? "¡Gracias por responder!" : "Thank you for responding!"}
               </h3>
-              <p className="font-serif text-[15px] text-[#1B365D]/80">
+              <p className="font-serif text-[16px] sm:text-[17px] text-[#1B365D]/85">
                 {lang === "es"
                   ? "Hemos recibido tu confirmación mediante WhatsApp."
                   : "We have received your RSVP via WhatsApp."}
               </p>
               <button
                 onClick={() => setIsSuccess(false)}
-                className="mt-4 px-5 py-2 rounded-xl bg-[#132742] text-[#dfb559] text-xs font-sans font-bold uppercase tracking-wider"
+                className="mt-4 px-6 py-2.5 rounded-xl bg-[#132742] text-[#dfb559] text-[13px] font-sans font-bold uppercase tracking-wider cursor-pointer"
               >
                 {lang === "es" ? "Enviar otra respuesta" : "Submit another response"}
               </button>
@@ -92,7 +93,7 @@ export default function RSVPPage() {
             <form onSubmit={handleSubmit} className="space-y-4 text-left">
               {/* Full Name */}
               <div>
-                <label className="block font-sans text-xs font-bold text-[#c5a059] uppercase tracking-wider mb-1.5">
+                <label className="block font-sans text-[12.5px] sm:text-[13.5px] font-bold text-[#c5a059] uppercase tracking-wider mb-1.5">
                   {lang === "es" ? "Nombres y Apellidos:" : "Full Name:"}
                 </label>
                 <input
@@ -101,20 +102,20 @@ export default function RSVPPage() {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   placeholder={lang === "es" ? "Ej. Familia Camacho Arias o Juan Pérez" : "Ex. John Doe"}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 text-[#1B365D] placeholder-[#1B365D]/40 font-serif text-[15px] focus:outline-none focus:ring-2 focus:ring-[#dfb559]/50"
+                  className="w-full px-4 py-3 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 text-[#1B365D] placeholder-[#1B365D]/40 font-serif text-[16px] focus:outline-none focus:ring-2 focus:ring-[#dfb559]/50"
                 />
               </div>
 
               {/* Attendance question */}
               <div>
-                <label className="block font-sans text-xs font-bold text-[#c5a059] uppercase tracking-wider mb-2">
+                <label className="block font-sans text-[12.5px] sm:text-[13.5px] font-bold text-[#c5a059] uppercase tracking-wider mb-2">
                   {lang === "es" ? "¿Podrás acompañarnos?" : "Will you attend?"}
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setAsistencia("si")}
-                    className={`py-2.5 px-3 rounded-xl border font-sans text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    className={`py-3 px-3 rounded-xl border font-sans text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                       asistencia === "si"
                         ? "bg-[#132742] text-[#dfb559] border-[#dfb559] shadow-sm"
                         : "bg-[#FAF6F0]/60 text-[#1B365D]/70 border-[#dfb559]/30 hover:bg-[#FAF6F0]"
@@ -127,7 +128,7 @@ export default function RSVPPage() {
                   <button
                     type="button"
                     onClick={() => setAsistencia("no")}
-                    className={`py-2.5 px-3 rounded-xl border font-sans text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    className={`py-3 px-3 rounded-xl border font-sans text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                       asistencia === "no"
                         ? "bg-[#132742] text-[#dfb559] border-[#dfb559] shadow-sm"
                         : "bg-[#FAF6F0]/60 text-[#1B365D]/70 border-[#dfb559]/30 hover:bg-[#FAF6F0]"
@@ -146,7 +147,7 @@ export default function RSVPPage() {
                   animate={{ opacity: 1, height: "auto" }}
                   className="space-y-1.5"
                 >
-                  <label className="block font-sans text-xs font-bold text-[#c5a059] uppercase tracking-wider mb-1">
+                  <label className="block font-sans text-[12.5px] sm:text-[13.5px] font-bold text-[#c5a059] uppercase tracking-wider mb-1">
                     {lang === "es" ? "Número de Asistentes:" : "Number of Guests:"}
                   </label>
                   <div className="grid grid-cols-4 gap-2">
@@ -155,7 +156,7 @@ export default function RSVPPage() {
                         key={opt}
                         type="button"
                         onClick={() => setAsistentes(opt)}
-                        className={`py-2 rounded-xl border font-sans text-xs font-bold uppercase transition-all cursor-pointer ${
+                        className={`py-2.5 rounded-xl border font-sans text-xs sm:text-[13px] font-bold uppercase transition-all cursor-pointer ${
                           asistentes === opt
                             ? "bg-[#132742] text-[#dfb559] border-[#dfb559]"
                             : "bg-[#FAF6F0]/60 text-[#1B365D]/70 border-[#dfb559]/30"
@@ -174,7 +175,7 @@ export default function RSVPPage() {
                       value={manualAsistentes}
                       onChange={(e) => setManualAsistentes(e.target.value)}
                       placeholder="Indica la cantidad exacta"
-                      className="w-full mt-2 px-4 py-2 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 text-[#1B365D] font-serif text-[15px] focus:outline-none focus:ring-2 focus:ring-[#dfb559]/50"
+                      className="w-full mt-2 px-4 py-2.5 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 text-[#1B365D] font-serif text-[16px] focus:outline-none focus:ring-2 focus:ring-[#dfb559]/50"
                     />
                   )}
                 </motion.div>
@@ -183,7 +184,7 @@ export default function RSVPPage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full mt-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#c5a059] via-[#dfb559] to-[#c5a059] text-[#132742] font-sans font-bold text-xs uppercase tracking-[0.2em] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full mt-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#c5a059] via-[#dfb559] to-[#c5a059] text-[#132742] font-sans font-bold text-[12.5px] sm:text-[13.5px] uppercase tracking-[0.2em] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Send className="w-4 h-4" />
                 <span>{lang === "es" ? "Confirmar por WhatsApp" : "Confirm via WhatsApp"}</span>

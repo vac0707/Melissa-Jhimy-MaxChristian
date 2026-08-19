@@ -150,26 +150,26 @@ export default function GuestBook() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-12 flex flex-col items-center"
+          className="text-center mb-8 sm:mb-12 flex flex-col items-center"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1B365D]/5 border border-[#dfb559]/30 mb-3">
             <Feather className="w-4 h-4 text-[#c5a059]" />
-            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[#1B365D] font-bold">
+            <span className="font-sans text-[12px] sm:text-[13px] uppercase tracking-[0.3em] text-[#1B365D] font-bold">
               {lang === "es" ? "Dedicatorias & Buenos Deseos" : "Wishes & Signatures"}
             </span>
           </div>
 
-          <h2 className="font-great-vibes text-5xl sm:text-7xl text-[#1B365D] mb-3 leading-tight select-none">
+          <h2 className="font-great-vibes text-[50px] sm:text-[68px] md:text-[76px] text-[#1B365D] mb-2 leading-tight select-none font-normal">
             {lang === "es" ? "Libro de Firmas" : "Guestbook"}
           </h2>
 
-          <p className="font-serif text-sm sm:text-base text-[#1B365D]/80 max-w-lg mx-auto leading-relaxed italic">
+          <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] max-w-lg mx-auto leading-relaxed italic font-normal px-2">
             {lang === "es"
               ? '"Déjanos tus palabras de cariño, bendición y amor para recordar este día por siempre."'
               : '"Leave us your words of love and blessings to cherish forever."'}
           </p>
 
-          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#dfb559]/60 to-transparent mt-4" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#dfb559]/60 to-transparent mt-3.5" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -189,14 +189,14 @@ export default function GuestBook() {
 
             <div className="flex items-center gap-2 mb-4">
               <BookOpen className="w-4 h-4 text-[#c5a059]" />
-              <h3 className="font-serif text-lg font-bold text-[#1B365D]">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1B365D]">
                 {lang === "es" ? "Firmar el Libro" : "Sign the Guestbook"}
               </h3>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
+                <label className="block text-[12.5px] sm:text-[13.5px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
                   {lang === "es" ? "Tu Nombre y Familia" : "Your Name & Family"}
                 </label>
                 <input
@@ -205,12 +205,12 @@ export default function GuestBook() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={lang === "es" ? "Ej. Familia Mendoza Retamoso" : "e.g. The Smith Family"}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B365D] text-sm text-[#1B365D] placeholder:text-gray-400 transition-all font-serif"
+                  className="w-full px-4 py-3 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B365D] text-[15.5px] sm:text-[16px] text-[#1B365D] placeholder:text-gray-400 transition-all font-serif"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
+                <label className="block text-[12.5px] sm:text-[13.5px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
                   {lang === "es" ? "Tu Dedicatoria o Bendición" : "Your Message or Blessing"}
                 </label>
                 <textarea
@@ -219,13 +219,13 @@ export default function GuestBook() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={lang === "es" ? "Escribe aquí tus deseos más sinceros..." : "Write your warmest wishes here..."}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B365D] text-sm text-[#1B365D] placeholder:text-gray-400 transition-all font-serif resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-[#dfb559]/40 bg-[#FAF6F0]/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B365D] text-[15.5px] sm:text-[16px] text-[#1B365D] placeholder:text-gray-400 transition-all font-serif resize-none"
                 />
               </div>
 
               {/* Stamp / Reaction selector */}
               <div>
-                <label className="block text-[11px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
+                <label className="block text-[12.5px] sm:text-[13.5px] font-bold text-[#1B365D] uppercase tracking-wider mb-1.5">
                   {lang === "es" ? "Sello de Bendición" : "Blessing Stamp"}
                 </label>
                 <div className="flex gap-2">
@@ -234,7 +234,7 @@ export default function GuestBook() {
                       type="button"
                       key={s.emoji}
                       onClick={() => setSelectedStamp(s.emoji)}
-                      className={`flex-1 py-1.5 rounded-xl text-base border transition-all cursor-pointer ${
+                      className={`flex-1 py-2 rounded-xl text-lg border transition-all cursor-pointer ${
                         selectedStamp === s.emoji
                           ? "border-[#1B365D] bg-[#1B365D] text-white scale-105 shadow-sm"
                           : "border-[#dfb559]/30 bg-[#FAF6F0] hover:bg-white text-gray-700"
@@ -252,7 +252,7 @@ export default function GuestBook() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3 px-4 rounded-xl bg-[#1B365D] hover:bg-[#132742] text-[#dfb559] border border-[#dfb559]/60 font-sans font-bold text-xs uppercase tracking-[0.2em] shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 disabled:opacity-50 mt-2"
+                className="w-full py-3.5 px-4 rounded-xl bg-[#1B365D] hover:bg-[#132742] text-[#dfb559] border border-[#dfb559]/60 font-sans font-bold text-[13px] sm:text-[14.5px] uppercase tracking-[0.2em] shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 disabled:opacity-50 mt-2"
               >
                 {isSubmitting ? (
                   <Sparkles className="w-4 h-4 animate-spin" />
@@ -274,11 +274,11 @@ export default function GuestBook() {
           {/* RIGHT: Wall of Signatures / Scrollable Parchment Wall */}
           <div className="lg:col-span-7 flex flex-col gap-3.5">
             <div className="flex items-center justify-between px-1 mb-1">
-              <span className="font-serif text-xs font-bold text-[#c5a059] uppercase tracking-wider">
+              <span className="font-serif text-[13px] sm:text-[14.5px] font-bold text-[#c5a059] uppercase tracking-wider">
                 {signatures.length} {lang === "es" ? "Dedicatorias registradas" : "Wishes registered"}
               </span>
-              <span className="text-[10px] text-[#1B365D]/60 flex items-center gap-1 font-serif">
-                <Clock className="w-3 h-3 text-[#c5a059]" /> {lang === "es" ? "Actualizado en vivo" : "Live updates"}
+              <span className="text-[11.5px] sm:text-[12.5px] text-[#1B365D]/75 flex items-center gap-1 font-serif">
+                <Clock className="w-3.5 h-3.5 text-[#c5a059]" /> {lang === "es" ? "Actualizado en vivo" : "Live updates"}
               </span>
             </div>
 
@@ -295,15 +295,15 @@ export default function GuestBook() {
                   >
                     {/* Top Row: Author & Stamp */}
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 rounded-full bg-[#1B365D]/10 border border-[#dfb559]/40 flex items-center justify-center text-base">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-9 h-9 rounded-full bg-[#1B365D]/10 border border-[#dfb559]/40 flex items-center justify-center text-lg">
                           {sig.stamp}
                         </span>
                         <div>
-                          <h4 className="font-serif font-bold text-[#1B365D] text-sm sm:text-base leading-tight">
+                          <h4 className="font-serif font-bold text-[#1B365D] text-[16px] sm:text-[17.5px] leading-tight">
                             {sig.name}
                           </h4>
-                          <span className="text-[10px] text-[#1B365D]/60 font-sans tracking-wide">
+                          <span className="text-[11px] sm:text-[12px] text-[#1B365D]/70 font-sans tracking-wide">
                             {sig.date}
                           </span>
                         </div>
@@ -312,7 +312,7 @@ export default function GuestBook() {
                       {/* WhatsApp Share Button */}
                       <button
                         onClick={() => sendWishViaWhatsApp(sig.message, sig.name)}
-                        className="opacity-60 hover:opacity-100 p-1.5 rounded-full hover:bg-emerald-50 text-emerald-600 transition-opacity"
+                        className="opacity-70 hover:opacity-100 p-2 rounded-full hover:bg-emerald-50 text-emerald-600 transition-opacity"
                         title={lang === "es" ? "Reenviar a WhatsApp de los novios" : "Send to WhatsApp"}
                       >
                         <MessageCircle className="w-4 h-4" />
@@ -320,7 +320,7 @@ export default function GuestBook() {
                     </div>
 
                     {/* Message Body */}
-                    <p className="font-serif text-[13px] sm:text-sm text-[#1B365D]/90 italic leading-relaxed pl-10 pr-2">
+                    <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D] italic leading-relaxed pl-11 pr-2 font-medium">
                       "{sig.message}"
                     </p>
 
@@ -328,18 +328,18 @@ export default function GuestBook() {
                     <div className="mt-3 pt-2 border-t border-[#dfb559]/15 flex items-center justify-end">
                       <button
                         onClick={() => handleLike(sig.id)}
-                        className={`flex items-center gap-1.5 text-xs font-serif px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                        className={`flex items-center gap-1.5 text-xs font-serif px-3 py-1 rounded-full transition-all cursor-pointer ${
                           likedMap[sig.id]
                             ? "bg-rose-50 text-rose-600 font-bold"
-                            : "text-[#1B365D]/70 hover:text-rose-600 hover:bg-rose-50/50"
+                            : "text-[#1B365D]/80 hover:text-rose-600 hover:bg-rose-50/50"
                         }`}
                       >
                         <Heart
-                          className={`w-3.5 h-3.5 ${
+                          className={`w-4 h-4 ${
                             likedMap[sig.id] ? "fill-rose-500 text-rose-500 animate-pulse" : ""
                           }`}
                         />
-                        <span>{sig.likes}</span>
+                        <span className="text-[13px] font-bold">{sig.likes}</span>
                       </button>
                     </div>
                   </motion.div>

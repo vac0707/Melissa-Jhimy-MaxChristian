@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MapPin, Calendar, Check, Church, GlassWater, HeartHandshake } from "lucide-react";
+import { MapPin, Calendar, Check } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function EventsAndMaps() {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
   const [showNotify, setShowNotify] = useState<string | null>(null);
 
   // External URLs provided by user
@@ -52,14 +52,14 @@ export default function EventsAndMaps() {
             transition={{ duration: 1 }}
             className="flex flex-col items-center"
           >
-            <MapPin className="w-5 h-5 text-[#dfb559] mb-4" />
-            <span className="font-sans text-[10px] tracking-[0.35em] text-[#c5a059] uppercase font-bold">
+            <MapPin className="w-5 h-5 text-[#dfb559] mb-3" />
+            <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.35em] text-[#c5a059] uppercase font-bold">
               {lang === "es" ? "Lugares y Horarios" : "Locations & Schedule"}
             </span>
-            <h2 className="font-great-vibes text-5.5xl sm:text-7xl text-[#1B365D] mt-2 mb-2 select-none font-normal">
+            <h2 className="font-great-vibes text-[50px] sm:text-[68px] md:text-[76px] text-[#1B365D] mt-2 mb-2 select-none font-normal">
               {lang === "es" ? "¿Dónde y Cuándo?" : "Where & When?"}
             </h2>
-            <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-4" />
+            <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-3" />
           </motion.div>
         </div>
 
@@ -108,7 +108,7 @@ export default function EventsAndMaps() {
                 </svg>
               </div>
 
-              <span className="font-sans text-[10px] tracking-[0.25em] text-[#c5a059] uppercase font-bold mb-1">
+              <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.25em] text-[#c5a059] uppercase font-bold mb-1.5">
                 {lang === "es" ? "Misa de Matrimonio & Bautizo" : "Wedding Mass & Baptism"}
               </span>
 
@@ -117,13 +117,13 @@ export default function EventsAndMaps() {
               </h3>
 
               <div className="space-y-1.5 mb-6">
-                <span className="font-serif text-[15px] text-[#1B365D] font-bold tracking-wide block">
+                <span className="font-serif text-[16px] sm:text-[17px] text-[#1B365D] font-bold tracking-wide block">
                   02:00 PM
                 </span>
-                <span className="text-xs text-[#1B365D]/75 font-sans block">
+                <span className="text-[14px] sm:text-[15px] text-[#1B365D]/85 font-sans block">
                   Plaza Mayor de Abancay
                 </span>
-                <span className="text-[11px] text-[#c5a059] italic block font-serif">
+                <span className="text-[13px] sm:text-[14px] text-[#c5a059] italic block font-serif font-medium">
                   {lang === "es" ? "Misa y Bautizo de Max Christian" : "Mass & Baptism of Max Christian"}
                 </span>
               </div>
@@ -135,9 +135,9 @@ export default function EventsAndMaps() {
                 href={churchNavUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-xs py-3 bg-[#1B365D] hover:bg-[#152a48] text-white font-serif text-[11px] font-bold uppercase tracking-[0.25em] shadow-md transition-all active:scale-97 cursor-pointer hover:shadow-lg rounded-lg flex items-center justify-center gap-2"
+                className="w-full max-w-xs py-3.5 bg-[#1B365D] hover:bg-[#152a48] text-white font-serif text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.25em] shadow-md transition-all active:scale-97 cursor-pointer hover:shadow-lg rounded-lg flex items-center justify-center gap-2"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#dfb559]" />
+                <MapPin className="w-4 h-4 text-[#dfb559]" />
                 <span>{lang === "es" ? "Ver Ubicación" : "View Map"}</span>
               </a>
               
@@ -146,7 +146,7 @@ export default function EventsAndMaps() {
                 onClick={() => triggerCalendarNotify(lang === "es" ? "Misa agendada en calendario" : "Mass added to calendar")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#1B365D] hover:text-[#c5a059] text-[10.5px] uppercase tracking-widest font-bold underline decoration-dotted underline-offset-4 flex items-center gap-1.5 transition-colors"
+                className="text-[#1B365D] hover:text-[#c5a059] text-[11.5px] sm:text-xs uppercase tracking-widest font-bold underline decoration-dotted underline-offset-4 flex items-center gap-1.5 transition-colors mt-1"
               >
                 <Calendar className="w-3.5 h-3.5 text-[#c5a059]" />
                 <span>{lang === "es" ? "Agendar Ceremonia" : "Add to Calendar"}</span>
@@ -193,7 +193,7 @@ export default function EventsAndMaps() {
                 </svg>
               </div>
 
-              <span className="font-sans text-[10px] tracking-[0.25em] text-[#c5a059] uppercase font-bold mb-1">
+              <span className="font-sans text-[12px] sm:text-[13px] tracking-[0.25em] text-[#c5a059] uppercase font-bold mb-1.5">
                 {lang === "es" ? "Ceremonia Civil & Recepción" : "Civil Ceremony & Reception"}
               </span>
 
@@ -202,13 +202,13 @@ export default function EventsAndMaps() {
               </h3>
 
               <div className="space-y-1.5 mb-6">
-                <span className="font-serif text-[15px] text-[#1B365D] font-bold tracking-wide block">
+                <span className="font-serif text-[16px] sm:text-[17px] text-[#1B365D] font-bold tracking-wide block">
                   04:30 PM (Civil) & 05:30 PM (Recepción)
                 </span>
-                <span className="text-xs text-[#1B365D]/75 font-sans block">
+                <span className="text-[14px] sm:text-[15px] text-[#1B365D]/85 font-sans block">
                   Abancay, Apurímac
                 </span>
-                <span className="text-[11px] text-[#c5a059] italic block font-serif">
+                <span className="text-[13px] sm:text-[14px] text-[#c5a059] italic block font-serif font-medium">
                   {lang === "es" ? "Ceremonia Civil, Cena & Gran Fiesta" : "Civil Ceremony, Dinner & Party"}
                 </span>
               </div>
@@ -220,9 +220,9 @@ export default function EventsAndMaps() {
                 href={receptionNavUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-xs py-3 bg-[#1B365D] hover:bg-[#152a48] text-white font-serif text-[11px] font-bold uppercase tracking-[0.25em] shadow-md transition-all active:scale-97 cursor-pointer hover:shadow-lg rounded-lg flex items-center justify-center gap-2"
+                className="w-full max-w-xs py-3.5 bg-[#1B365D] hover:bg-[#152a48] text-white font-serif text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.25em] shadow-md transition-all active:scale-97 cursor-pointer hover:shadow-lg rounded-lg flex items-center justify-center gap-2"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#dfb559]" />
+                <MapPin className="w-4 h-4 text-[#dfb559]" />
                 <span>{lang === "es" ? "Ver Ubicación" : "View Map"}</span>
               </a>
 
@@ -231,7 +231,7 @@ export default function EventsAndMaps() {
                 onClick={() => triggerCalendarNotify(lang === "es" ? "Recepción agendada en calendario" : "Reception added to calendar")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#1B365D] hover:text-[#c5a059] text-[10.5px] uppercase tracking-widest font-bold underline decoration-dotted underline-offset-4 flex items-center gap-1.5 transition-colors"
+                className="text-[#1B365D] hover:text-[#c5a059] text-[11.5px] sm:text-xs uppercase tracking-widest font-bold underline decoration-dotted underline-offset-4 flex items-center gap-1.5 transition-colors mt-1"
               >
                 <Calendar className="w-3.5 h-3.5 text-[#c5a059]" />
                 <span>{lang === "es" ? "Agendar Recepción" : "Add to Calendar"}</span>

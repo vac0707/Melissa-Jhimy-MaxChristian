@@ -47,10 +47,10 @@ export default function Gifts() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.1 }}
-          className="text-center w-full flex flex-col items-center mb-6"
+          className="text-center w-full flex flex-col items-center mb-5 sm:mb-6"
         >
           {/* Subtitle Tag */}
-          <span className="font-sans text-[11px] sm:text-[12.5px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1">
+          <span className="font-sans text-[12px] sm:text-[13px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1">
             {lang === "es" ? "Muestra de Cariño" : "Token of Love"}
           </span>
 
@@ -59,10 +59,10 @@ export default function Gifts() {
             {lang === "es" ? "Lluvia de Sobres" : "Envelope Shower"}
           </h2>
 
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-4" />
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-3.5" />
 
-          {/* Description */}
-          <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 italic max-w-lg leading-relaxed font-medium px-4">
+          {/* Description - Enlarged font for clarity and comfort */}
+          <p className="font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] italic max-w-lg leading-relaxed font-medium px-4">
             {lang === "es"
               ? "Tu presencia y buenos deseos son nuestro mejor regalo. Si deseas tener un detalle con nosotros, dispondremos de un buzón en la recepción o puedes hacerlo a través de nuestras cuentas:"
               : "Your presence and warm wishes are our greatest gift. If you wish to give us a present, a mailbox will be available at the reception or via our bank details:"}
@@ -75,22 +75,22 @@ export default function Gifts() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="w-full max-w-md bg-white/90 rounded-2xl p-5 sm:p-7 border border-[#dfb559]/40 shadow-sm space-y-4"
+          className="w-full max-w-md bg-white/95 rounded-2xl p-5 sm:p-7 border border-[#dfb559]/40 shadow-sm space-y-4"
         >
           {/* BCP Soles */}
           <div className="bg-[#FAF6F0] rounded-xl p-3.5 sm:p-4 border border-[#dfb559]/25 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#132742] text-[#dfb559] flex items-center justify-center shrink-0">
-                <Building2 className="w-5 h-5" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#132742] text-[#dfb559] flex items-center justify-center shrink-0">
+                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="text-left">
-                <p className="font-sans text-[11px] sm:text-[12px] font-bold text-[#c5a059] uppercase tracking-wider">
+                <p className="font-sans text-[11.5px] sm:text-[12.5px] font-bold text-[#c5a059] uppercase tracking-wider">
                   BCP Soles
                 </p>
-                <p className="font-serif text-[16px] sm:text-[17px] font-bold text-[#1B365D] tracking-wide">
+                <p className="font-serif text-[17px] sm:text-[18.5px] font-bold text-[#1B365D] tracking-wide">
                   {bCPFormatter(bcpAccount)}
                 </p>
-                <p className="text-[11px] sm:text-[12px] text-[#1B365D]/75 font-mono">
+                <p className="text-[12px] sm:text-[13px] text-[#1B365D]/85 font-mono">
                   CCI: {bcpCci}
                 </p>
               </div>
@@ -98,17 +98,17 @@ export default function Gifts() {
 
             <button
               onClick={() => handleCopy(bcpAccount, "bcp")}
-              className="p-2 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
+              className="p-2 sm:px-3 sm:py-2 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
               title="Copiar número de cuenta"
             >
               {copiedAccount === "bcp" ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-4 h-4 text-emerald-600" />
                   <span className="hidden sm:inline text-emerald-600">Copiado</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <Copy className="w-4 h-4 text-[#c5a059]" />
                   <span className="hidden sm:inline">Copiar</span>
                 </>
               )}
@@ -118,14 +118,14 @@ export default function Gifts() {
           {/* Yape / Plin */}
           <div className="bg-[#FAF6F0] rounded-xl p-3.5 sm:p-4 border border-[#dfb559]/25 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#7209B7] to-[#4361EE] text-white flex items-center justify-center shrink-0 shadow-xs">
-                <Smartphone className="w-5 h-5" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-gradient-to-br from-[#7209B7] to-[#4361EE] text-white flex items-center justify-center shrink-0 shadow-xs">
+                <Smartphone className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="text-left">
-                <p className="font-sans text-[11px] sm:text-[12px] font-bold text-[#7209B7] uppercase tracking-wider">
+                <p className="font-sans text-[11.5px] sm:text-[12.5px] font-bold text-[#7209B7] uppercase tracking-wider">
                   Yape / Plin
                 </p>
-                <p className="font-serif text-[17px] sm:text-[18px] font-bold text-[#1B365D] tracking-wide">
+                <p className="font-serif text-[18px] sm:text-[19.5px] font-bold text-[#1B365D] tracking-wide">
                   {yapePlinPhone}
                 </p>
               </div>
@@ -133,24 +133,24 @@ export default function Gifts() {
 
             <button
               onClick={() => handleCopy("980852503", "yape")}
-              className="p-2 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
+              className="p-2 sm:px-3 sm:py-2 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
               title="Copiar número Yape / Plin"
             >
               {copiedAccount === "yape" ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-4 h-4 text-emerald-600" />
                   <span className="hidden sm:inline text-emerald-600">Copiado</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <Copy className="w-4 h-4 text-[#c5a059]" />
                   <span className="hidden sm:inline">Copiar</span>
                 </>
               )}
             </button>
           </div>
 
-          <p className="text-[11.5px] sm:text-[12.5px] text-center text-[#1B365D]/75 font-serif italic pt-1">
+          <p className="text-[13.5px] sm:text-[15px] text-center text-[#1B365D]/85 font-serif italic pt-1">
             ¡Muchas gracias por su amor y generosidad!
           </p>
         </motion.div>

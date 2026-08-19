@@ -226,21 +226,21 @@ export default function Schedule() {
                       >
                         {/* Information texts: Time & Title */}
                         <div className="flex flex-col">
-                          <span className="font-serif text-[12px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
+                          <span className="font-serif text-[13px] sm:text-[14px] tracking-wider text-[#c5a059] font-bold leading-none mb-1">
                             {item.time}
                           </span>
-                          <span className="font-serif font-bold text-[13.5px] sm:text-[15.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
+                          <span className="font-serif font-bold text-[14.5px] sm:text-[16.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
                             {lang === "es" ? item.titleEs : item.titleEn}
                           </span>
                           {item.descEs && (
-                            <span className="text-[11px] sm:text-[12px] text-[#1B365D]/80 font-sans mt-0.5">
+                            <span className="text-[12px] sm:text-[13px] text-[#1B365D]/85 font-sans mt-0.5">
                               {item.descEs}
                             </span>
                           )}
                         </div>
 
                         {/* Hand Sketched Icon inside clean box */}
-                        <div className="w-[54px] h-[54px] sm:w-[65px] sm:h-[65px] rounded-sm border border-[#dfb559]/40 bg-white shadow-sm flex items-center justify-center flex-shrink-0 relative">
+                        <div className="w-[56px] h-[56px] sm:w-[68px] sm:h-[68px] rounded-sm border border-[#dfb559]/40 bg-white shadow-sm flex items-center justify-center flex-shrink-0 relative">
                           {item.icon}
                         </div>
 
@@ -264,20 +264,20 @@ export default function Schedule() {
                         <div className="absolute left-[-16px] sm:left-[-24px] top-1/2 -translate-y-1/2 w-4 sm:w-6 h-[1px] bg-[#dfb559]/60" />
 
                         {/* Hand Sketched Icon inside clean box */}
-                        <div className="w-[54px] h-[54px] sm:w-[65px] sm:h-[65px] rounded-sm border border-[#dfb559]/40 bg-white shadow-sm flex items-center justify-center flex-shrink-0 relative">
+                        <div className="w-[56px] h-[56px] sm:w-[68px] sm:h-[68px] rounded-sm border border-[#dfb559]/40 bg-white shadow-sm flex items-center justify-center flex-shrink-0 relative">
                           {item.icon}
                         </div>
 
                         {/* Information texts: Time & Title */}
                         <div className="flex flex-col">
-                          <span className="font-serif text-[12px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
+                          <span className="font-serif text-[13px] sm:text-[14px] tracking-wider text-[#c5a059] font-bold leading-none mb-1">
                             {item.time}
                           </span>
-                          <span className="font-serif font-bold text-[13.5px] sm:text-[15.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
+                          <span className="font-serif font-bold text-[14.5px] sm:text-[16.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
                             {lang === "es" ? item.titleEs : item.titleEn}
                           </span>
                           {item.descEs && (
-                            <span className="text-[11px] sm:text-[12px] text-[#1B365D]/80 font-sans mt-0.5">
+                            <span className="text-[12px] sm:text-[13px] text-[#1B365D]/85 font-sans mt-0.5">
                               {item.descEs}
                             </span>
                           )}
@@ -302,7 +302,7 @@ export default function Schedule() {
         >
           <div className="w-16 h-[0.7px] bg-[#dfb559]/40 mb-5" />
 
-          <h3 className="font-serif text-[14.5px] sm:text-[17px] font-bold text-[#1B365D] uppercase tracking-[0.2em] select-none">
+          <h3 className="font-serif text-[15.5px] sm:text-[18px] font-bold text-[#1B365D] uppercase tracking-[0.2em] select-none">
             {lang === "es" ? "¡CELEBRACIÓN Y FIESTA INOLVIDABLE!" : "¡UNFORGETTABLE CELEBRATION!"}
           </h3>
 

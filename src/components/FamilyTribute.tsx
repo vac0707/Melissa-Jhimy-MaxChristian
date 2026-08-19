@@ -37,7 +37,7 @@ export default function FamilyTribute() {
         >
           <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
             <Sparkles className="w-3.5 h-3.5" />
-            <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.25em] uppercase font-bold text-[#c5a059]">
+            <span className="font-sans text-[12px] sm:text-[13.5px] tracking-[0.25em] uppercase font-bold text-[#c5a059]">
               {lang === "es" ? "Con la bendición de Dios y de" : "With the blessing of God and"}
             </span>
             <Sparkles className="w-3.5 h-3.5" />
@@ -61,23 +61,23 @@ export default function FamilyTribute() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 items-start text-center border-b border-[#dfb559]/30 pb-6 sm:pb-7">
             {/* Bride Parents */}
             <div className="flex flex-col items-center px-2">
-              <span className="font-sans text-[11.5px] sm:text-[13px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-2 block">
+              <span className="font-sans text-[12.5px] sm:text-[14px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-2 block">
                 {lang === "es" ? "Padres de la Novia" : "Bride's Parents"}
               </span>
               <div className="w-8 h-[0.5px] bg-[#dfb559]/40 mb-2.5" />
               <div className="space-y-1.5">
-                <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
+                <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
                   Asunta Palomino López
                 </p>
                 <div className="flex items-center justify-center gap-1.5">
-                  <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
+                  <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
                     Mario Retamoso Ávalos
                   </p>
-                  <span className="text-xs text-[#c5a059] font-serif italic" title="En memoria celestial">
+                  <span className="text-sm text-[#c5a059] font-serif italic" title="En memoria celestial">
                     (†)
                   </span>
                 </div>
-                <span className="text-[11.5px] sm:text-[12.5px] text-[#c5a059] italic block font-serif">
+                <span className="text-[12.5px] sm:text-[13.5px] text-[#c5a059] italic block font-serif">
                   {lang === "es" ? "En nuestro corazón y bendición celestial" : "Forever in our hearts"}
                 </span>
               </div>
@@ -85,15 +85,15 @@ export default function FamilyTribute() {
 
             {/* Groom Parents */}
             <div className="flex flex-col items-center px-2 md:border-l border-[#dfb559]/30">
-              <span className="font-sans text-[11.5px] sm:text-[13px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-2 block">
+              <span className="font-sans text-[12.5px] sm:text-[14px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-2 block">
                 {lang === "es" ? "Padres del Novio" : "Groom's Parents"}
               </span>
               <div className="w-8 h-[0.5px] bg-[#dfb559]/40 mb-2.5" />
               <div className="space-y-1.5">
-                <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
+                <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
                   Laura Espinoza Sánchez
                 </p>
-                <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
+                <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold leading-relaxed tracking-wide">
                   Maxi Saúl Camacho Arias
                 </p>
               </div>
@@ -102,15 +102,15 @@ export default function FamilyTribute() {
 
           {/* Wedding Godparents Row */}
           <div className="flex flex-col items-center text-center">
-            <span className="font-sans text-[11.5px] sm:text-[13px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-1.5 block">
+            <span className="font-sans text-[12.5px] sm:text-[14px] uppercase tracking-[0.22em] text-[#1B365D] font-bold mb-1.5 block">
               {lang === "es" ? "Padrinos de Matrimonio Religioso y Civil" : "Wedding Godparents (Religious & Civil)"}
             </span>
             <div className="w-8 h-[0.5px] bg-[#dfb559]/40 mb-2.5" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 max-w-md w-full">
-              <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold tracking-wide">
+              <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold tracking-wide">
                 Roger Paucar Quispe
               </p>
-              <p className="font-serif text-[16.5px] sm:text-[18.5px] text-[#1B365D] font-semibold tracking-wide">
+              <p className="font-serif text-[17.5px] sm:text-[19.5px] text-[#1B365D] font-semibold tracking-wide">
                 Yovana Quispe Conde
               </p>
             </div>
@@ -141,7 +141,7 @@ export default function FamilyTribute() {
         >
           <div className="inline-flex items-center gap-1.5 mb-1 text-[#c5a059]">
             <Church className="w-3.5 h-3.5 text-[#c5a059]" />
-            <span className="font-sans text-[11px] sm:text-[12.5px] uppercase tracking-[0.22em] text-[#1B365D] font-bold block">
+            <span className="font-sans text-[12px] sm:text-[13.5px] uppercase tracking-[0.22em] text-[#1B365D] font-bold block">
               {lang === "es" ? "Bautizo y 1er Añito de nuestro amado hijo" : "Baptism & 1st Birthday of our son"}
             </span>
             <Church className="w-3.5 h-3.5 text-[#c5a059]" />
@@ -152,14 +152,14 @@ export default function FamilyTribute() {
           </h3>
 
           <div className="bg-white/90 border border-[#dfb559]/50 rounded-2xl p-4 sm:p-5 max-w-md w-full shadow-sm mt-1">
-            <span className="font-sans text-[10.5px] sm:text-[12px] uppercase tracking-[0.22em] text-[#c5a059] font-bold mb-2 block">
+            <span className="font-sans text-[11.5px] sm:text-[13px] uppercase tracking-[0.22em] text-[#c5a059] font-bold mb-2 block">
               {lang === "es" ? "Padrinos de Bautizo" : "Baptism Godparents"}
             </span>
             <div className="space-y-1.5">
-              <p className="font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] font-semibold">
+              <p className="font-serif text-[17.5px] sm:text-[19px] text-[#1B365D] font-semibold">
                 Nilton Mario Retamoso Palomino
               </p>
-              <p className="font-serif text-[16.5px] sm:text-[18px] text-[#1B365D] font-semibold">
+              <p className="font-serif text-[17.5px] sm:text-[19px] text-[#1B365D] font-semibold">
                 Endira Retamoso Palomino
               </p>
             </div>
