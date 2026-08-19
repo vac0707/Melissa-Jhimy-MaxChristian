@@ -8,10 +8,26 @@ import {
   Check, 
   MessageCircle, 
   Feather,
-  Clock
+  Clock,
+  Download,
+  FileText,
+  Globe
 } from "lucide-react";
 import PageFloralFrame from "./PageFloralFrame";
 import { useLanguage } from "../hooks/useLanguage";
+import { db } from "../lib/firebase";
+import { 
+  collection, 
+  onSnapshot, 
+  addDoc, 
+  doc, 
+  updateDoc, 
+  increment, 
+  query, 
+  orderBy, 
+  getDocs, 
+  deleteDoc 
+} from "firebase/firestore";
 
 interface Signature {
   id: string;
@@ -20,34 +36,10 @@ interface Signature {
   date: string;
   stamp: string;
   likes: number;
+  createdAt?: number;
 }
 
-const INITIAL_SIGNATURES: Signature[] = [
-  {
-    id: "sig-1",
-    name: "Familia Retamoso Palomino",
-    message: "¡Que Dios bendiga infinitamente su sagrada unión y a nuestro adorado Max Christian! Los amamos con todo el corazón.",
-    date: "Hace un momento",
-    stamp: "🕊️",
-    likes: 12,
-  },
-  {
-    id: "sig-2",
-    name: "Familia Camacho Espinoza",
-    message: "Felicidades Melissa y Jhimy en este triple festejo tan especial. Que el amor y la prosperidad colmen su hogar siempre.",
-    date: "Hace unos minutos",
-    stamp: "💍",
-    likes: 9,
-  },
-  {
-    id: "sig-3",
-    name: "Padrinos Roger & Yovana",
-    message: "Un honor inmenso acompañarlos como padrinos. Cuenten siempre con nosotros en este hermoso camino de vida.",
-    date: "Hoy",
-    stamp: "✨",
-    likes: 15,
-  },
-];
+const STORAGE_KEY = "melissa_jhimy_guestbook_signatures_v2";
 
 const STAMPS = [
   { emoji: "❤️", label: "Amor" },
@@ -66,66 +58,188 @@ export default function GuestBook() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [likedMap, setLikedMap] = useState<Record<string, boolean>>({});
+  const [isConnectedToCloud, setIsConnectedToCloud] = useState(false);
 
-  // Load from localStorage or initial state
+  // Real-time Firestore sync listener across the entire world
   useEffect(() => {
+    // 1. Try local cache first for instant UI response
     try {
-      const saved = localStorage.getItem("melissa_jhimy_guestbook_signatures");
-      if (saved) {
-        setSignatures(JSON.parse(saved));
-      } else {
-        setSignatures(INITIAL_SIGNATURES);
+      const cached = localStorage.getItem(STORAGE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          setSignatures(parsed);
+        }
       }
-    } catch {
-      setSignatures(INITIAL_SIGNATURES);
+    } catch (e) {
+      console.warn("Local storage cache read error", e);
+    }
+
+    // 2. Subscribe to Firestore collection in real time
+    try {
+      const sigsQuery = query(
+        collection(db, "guestbook_signatures"),
+        orderBy("createdAt", "desc")
+      );
+
+      const unsubscribe = onSnapshot(
+        sigsQuery,
+        (snapshot) => {
+          setIsConnectedToCloud(true);
+          const liveSigs: Signature[] = snapshot.docs.map((docSnap) => {
+            const data = docSnap.data();
+            return {
+              id: docSnap.id,
+              name: data.name || "",
+              message: data.message || "",
+              date: data.date || "",
+              stamp: data.stamp || "❤️",
+              likes: typeof data.likes === "number" ? data.likes : 1,
+              createdAt: data.createdAt || 0,
+            };
+          });
+
+          setSignatures(liveSigs);
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(liveSigs));
+          } catch (e) {
+            console.warn("Cache write error", e);
+          }
+        },
+        (error) => {
+          console.error("Firestore real-time listener error:", error);
+          setIsConnectedToCloud(false);
+        }
+      );
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.error("Error setting up Firestore listener:", err);
     }
   }, []);
 
-  const saveSignatures = (newSigs: Signature[]) => {
-    setSignatures(newSigs);
-    try {
-      localStorage.setItem("melissa_jhimy_guestbook_signatures", JSON.stringify(newSigs));
-    } catch (e) {
-      console.error(e);
+  const handleClearAll = async () => {
+    if (window.confirm(lang === "es" ? "¿Deseas vaciar todas las firmas registradas en la nube para reiniciar la prueba?" : "Do you want to clear all cloud signatures for testing?")) {
+      try {
+        const sigsCollection = collection(db, "guestbook_signatures");
+        const snapshot = await getDocs(sigsCollection);
+        const deletePromises = snapshot.docs.map((d) => deleteDoc(d.ref));
+        await Promise.all(deletePromises);
+        setSignatures([]);
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        console.error("Error clearing signatures:", e);
+        // Fallback local clear
+        setSignatures([]);
+        localStorage.removeItem(STORAGE_KEY);
+      }
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleDownloadTxt = () => {
+    if (signatures.length === 0) {
+      alert(lang === "es" ? "No hay dedicatorias registradas aún para descargar." : "There are no wishes to download yet.");
+      return;
+    }
+
+    const title = "========================================================\n" +
+                  "           LIBRO DE FIRMAS Y DEDICATORIAS\n" +
+                  "      MATRIMONIO: MELISSA & JHIMY\n" +
+                  "      BAUTIZO Y 1ER AÑO: MAX CHRISTIAN\n" +
+                  "      FECHA DEL EVENTO: Lunes 7 de Setiembre de 2026\n" +
+                  "      LUGAR: Abancay, Apurímac - Perú\n" +
+                  "========================================================\n\n" +
+                  `Total de dedicatorias registradas: ${signatures.length}\n` +
+                  `Fecha de descarga: ${new Date().toLocaleString("es-PE")}\n\n` +
+                  "========================================================\n" +
+                  "                 MENSAJES DE LOS INVITADOS\n" +
+                  "========================================================\n\n";
+
+    const content = signatures.map((sig, index) => {
+      return `--------------------------------------------------------\n` +
+             `#${index + 1} | De: ${sig.name} [${sig.stamp}]\n` +
+             `Fecha: ${sig.date}\n` +
+             `Me gusta: ${sig.likes} ❤️\n\n` +
+             `Dedicatoria:\n` +
+             `"${sig.message}"\n`;
+    }).join("\n");
+
+    const footer = "\n========================================================\n" +
+                   "      ¡Gracias a todos por sus hermosos deseos!\n" +
+                   "              Con amor: Melissa, Jhimy & Max\n" +
+                   "========================================================\n";
+
+    const fullText = title + content + footer;
+    const blob = new Blob([fullText], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Libro-de-Firmas-Melissa-y-Jhimy-${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
 
     setIsSubmitting(true);
 
-    const newSignature: Signature = {
-      id: "sig-" + Date.now(),
+    const now = new Date();
+    const formattedDate = lang === "es"
+      ? `Hoy ${now.toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" })}`
+      : `Today ${now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`;
+
+    const newSignatureData = {
       name: name.trim(),
       message: message.trim(),
-      date: lang === "es" ? "Recién firmado" : "Just signed",
+      date: formattedDate,
       stamp: selectedStamp,
       likes: 1,
+      createdAt: Date.now(),
     };
 
-    setTimeout(() => {
-      const updated = [newSignature, ...signatures];
-      saveSignatures(updated);
+    try {
+      // Save directly to Firebase Firestore for global instant visibility
+      await addDoc(collection(db, "guestbook_signatures"), newSignatureData);
+    } catch (error) {
+      console.error("Error writing to Firestore, saving to local fallback:", error);
+      // Fallback local save if offline
+      const localSig: Signature = {
+        id: "sig-" + Date.now(),
+        ...newSignatureData,
+      };
+      const updated = [localSig, ...signatures];
+      setSignatures(updated);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } finally {
       setIsSubmitting(false);
       setSubmitted(true);
       setName("");
       setMessage("");
       setTimeout(() => setSubmitted(false), 4000);
-    }, 400);
+    }
   };
 
-  const handleLike = (id: string) => {
+  const handleLike = async (id: string) => {
     if (likedMap[id]) return;
     setLikedMap((prev) => ({ ...prev, [id]: true }));
-    const updated = signatures.map((sig) => {
-      if (sig.id === id) {
-        return { ...sig, likes: sig.likes + 1 };
-      }
-      return sig;
-    });
-    saveSignatures(updated);
+
+    // Optimistic local update
+    setSignatures((prev) =>
+      prev.map((sig) => (sig.id === id ? { ...sig, likes: sig.likes + 1 } : sig))
+    );
+
+    try {
+      const docRef = doc(db, "guestbook_signatures", id);
+      await updateDoc(docRef, {
+        likes: increment(1),
+      });
+    } catch (e) {
+      console.error("Error updating likes on Firestore:", e);
+    }
   };
 
   const sendWishViaWhatsApp = (wishMsg: string, wishAuthor: string) => {
@@ -273,79 +387,145 @@ export default function GuestBook() {
 
           {/* RIGHT: Wall of Signatures / Scrollable Parchment Wall */}
           <div className="lg:col-span-7 flex flex-col gap-3.5">
-            <div className="flex items-center justify-between px-1 mb-1">
-              <span className="font-serif text-[13px] sm:text-[14.5px] font-bold text-[#c5a059] uppercase tracking-wider">
-                {signatures.length} {lang === "es" ? "Dedicatorias registradas" : "Wishes registered"}
-              </span>
-              <span className="text-[11.5px] sm:text-[12.5px] text-[#1B365D]/75 flex items-center gap-1 font-serif">
-                <Clock className="w-3.5 h-3.5 text-[#c5a059]" /> {lang === "es" ? "Actualizado en vivo" : "Live updates"}
-              </span>
+            <div className="flex items-center justify-between px-1 mb-1 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <span className="font-serif text-[13px] sm:text-[14.5px] font-bold text-[#c5a059] uppercase tracking-wider">
+                  {signatures.length} {lang === "es" ? "Dedicatorias registradas" : "Wishes registered"}
+                </span>
+                {signatures.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearAll}
+                    className="text-[11px] text-gray-400 hover:text-rose-600 underline font-sans transition-colors cursor-pointer ml-1"
+                    title={lang === "es" ? "Vaciar firmas para prueba" : "Clear for testing"}
+                  >
+                    {lang === "es" ? "(Limpiar)" : "(Clear)"}
+                  </button>
+                )}
+              </div>
+              
+              <div className="flex items-center gap-2">
+                {signatures.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleDownloadTxt}
+                    className="px-2.5 py-1 rounded-full bg-[#1B365D] hover:bg-[#132742] text-[#dfb559] border border-[#dfb559]/50 text-[11.5px] sm:text-xs font-serif font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer hover:scale-105 active:scale-95"
+                    title={lang === "es" ? "Descargar todas las dedicatorias en archivo .txt" : "Download all wishes as .txt file"}
+                  >
+                    <Download className="w-3 h-3 text-[#dfb559]" />
+                    <span>{lang === "es" ? "Descargar .TXT" : "Download .TXT"}</span>
+                  </button>
+                )}
+
+                <span className="text-[11px] sm:text-[12px] text-[#1B365D]/75 flex items-center gap-1 font-serif">
+                  <Clock className="w-3.5 h-3.5 text-[#c5a059]" /> {lang === "es" ? "En vivo" : "Live"}
+                </span>
+              </div>
             </div>
 
-            <div className="max-h-[460px] overflow-y-auto pr-1 space-y-3.5 custom-scrollbar">
-              <AnimatePresence initial={false}>
-                {signatures.map((sig, idx) => (
-                  <motion.div
-                    key={sig.id}
-                    initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, delay: Math.min(idx * 0.05, 0.3) }}
-                    className="p-4 sm:p-5 rounded-2xl bg-white/85 border border-[#dfb559]/40 shadow-xs hover:shadow-md transition-all duration-300 relative group"
-                  >
-                    {/* Top Row: Author & Stamp */}
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-9 h-9 rounded-full bg-[#1B365D]/10 border border-[#dfb559]/40 flex items-center justify-center text-lg">
-                          {sig.stamp}
-                        </span>
-                        <div>
-                          <h4 className="font-serif font-bold text-[#1B365D] text-[16px] sm:text-[17.5px] leading-tight">
-                            {sig.name}
-                          </h4>
-                          <span className="text-[11px] sm:text-[12px] text-[#1B365D]/70 font-sans tracking-wide">
-                            {sig.date}
+            <div className="max-h-[460px] overflow-y-auto pr-1 space-y-3.5 custom-scrollbar min-h-[160px]">
+              {signatures.length === 0 ? (
+                <div className="p-8 sm:p-10 rounded-2xl bg-white/75 border border-dashed border-[#dfb559]/50 text-center flex flex-col items-center justify-center space-y-2.5 shadow-xs">
+                  <div className="w-12 h-12 rounded-full bg-[#1B365D]/5 border border-[#dfb559]/40 text-[#c5a059] flex items-center justify-center mb-1">
+                    <Feather className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-[17px] sm:text-[18.5px] text-[#1B365D]">
+                    {lang === "es" ? "El libro de firmas está listo" : "The guestbook is ready"}
+                  </h4>
+                  <p className="font-serif text-[14px] sm:text-[15px] text-[#1B365D]/75 max-w-sm italic leading-relaxed">
+                    {lang === "es"
+                      ? "Aún no hay dedicatorias. Sé el primero en escribir unas hermosas palabras para Melissa, Jhimy y Max Christian."
+                      : "No wishes yet. Be the first to leave your warm words for Melissa, Jhimy & Max Christian."}
+                  </p>
+                </div>
+              ) : (
+                <AnimatePresence initial={false}>
+                  {signatures.map((sig, idx) => (
+                    <motion.div
+                      key={sig.id}
+                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.5, delay: Math.min(idx * 0.05, 0.3) }}
+                      className="p-4 sm:p-5 rounded-2xl bg-white/85 border border-[#dfb559]/40 shadow-xs hover:shadow-md transition-all duration-300 relative group"
+                    >
+                      {/* Top Row: Author & Stamp */}
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-2.5">
+                          <span className="w-9 h-9 rounded-full bg-[#1B365D]/10 border border-[#dfb559]/40 flex items-center justify-center text-lg">
+                            {sig.stamp}
                           </span>
+                          <div>
+                            <h4 className="font-serif font-bold text-[#1B365D] text-[16px] sm:text-[17.5px] leading-tight">
+                              {sig.name}
+                            </h4>
+                            <span className="text-[11px] sm:text-[12px] text-[#1B365D]/70 font-sans tracking-wide">
+                              {sig.date}
+                            </span>
+                          </div>
                         </div>
+
+                        {/* WhatsApp Share Button */}
+                        <button
+                          onClick={() => sendWishViaWhatsApp(sig.message, sig.name)}
+                          className="opacity-70 hover:opacity-100 p-2 rounded-full hover:bg-emerald-50 text-emerald-600 transition-opacity"
+                          title={lang === "es" ? "Reenviar a WhatsApp de los novios" : "Send to WhatsApp"}
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                        </button>
                       </div>
 
-                      {/* WhatsApp Share Button */}
-                      <button
-                        onClick={() => sendWishViaWhatsApp(sig.message, sig.name)}
-                        className="opacity-70 hover:opacity-100 p-2 rounded-full hover:bg-emerald-50 text-emerald-600 transition-opacity"
-                        title={lang === "es" ? "Reenviar a WhatsApp de los novios" : "Send to WhatsApp"}
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                      </button>
-                    </div>
+                      {/* Message Body */}
+                      <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D] italic leading-relaxed pl-11 pr-2 font-medium">
+                        "{sig.message}"
+                      </p>
 
-                    {/* Message Body */}
-                    <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D] italic leading-relaxed pl-11 pr-2 font-medium">
-                      "{sig.message}"
-                    </p>
-
-                    {/* Footer / Like Counter */}
-                    <div className="mt-3 pt-2 border-t border-[#dfb559]/15 flex items-center justify-end">
-                      <button
-                        onClick={() => handleLike(sig.id)}
-                        className={`flex items-center gap-1.5 text-xs font-serif px-3 py-1 rounded-full transition-all cursor-pointer ${
-                          likedMap[sig.id]
-                            ? "bg-rose-50 text-rose-600 font-bold"
-                            : "text-[#1B365D]/80 hover:text-rose-600 hover:bg-rose-50/50"
-                        }`}
-                      >
-                        <Heart
-                          className={`w-4 h-4 ${
-                            likedMap[sig.id] ? "fill-rose-500 text-rose-500 animate-pulse" : ""
+                      {/* Footer / Like Counter */}
+                      <div className="mt-3 pt-2 border-t border-[#dfb559]/15 flex items-center justify-end">
+                        <button
+                          onClick={() => handleLike(sig.id)}
+                          className={`flex items-center gap-1.5 text-xs font-serif px-3 py-1 rounded-full transition-all cursor-pointer ${
+                            likedMap[sig.id]
+                              ? "bg-rose-50 text-rose-600 font-bold"
+                              : "text-[#1B365D]/80 hover:text-rose-600 hover:bg-rose-50/50"
                           }`}
-                        />
-                        <span className="text-[13px] font-bold">{sig.likes}</span>
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                        >
+                          <Heart
+                            className={`w-4 h-4 ${
+                              likedMap[sig.id] ? "fill-rose-500 text-rose-500 animate-pulse" : ""
+                            }`}
+                          />
+                          <span className="text-[13px] font-bold">{sig.likes}</span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              )}
             </div>
+
+            {/* Bottom Export Bar when there are signatures */}
+            {signatures.length > 0 && (
+              <div className="p-3 rounded-xl bg-[#1B365D]/5 border border-[#dfb559]/40 flex items-center justify-between flex-wrap gap-2 mt-1">
+                <div className="flex items-center gap-2 text-left">
+                  <FileText className="w-4 h-4 text-[#c5a059] flex-shrink-0" />
+                  <p className="text-[12px] sm:text-[13px] text-[#1B365D] font-serif">
+                    <span className="font-bold">{lang === "es" ? "Guardado seguro:" : "Safe storage:"}</span>{" "}
+                    {lang === "es" 
+                      ? "Descarga todo el libro en archivo de texto (.txt) como recuerdo." 
+                      : "Download all wishes as a text file (.txt) keepsake."}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleDownloadTxt}
+                  className="px-3.5 py-1.5 rounded-lg bg-[#132742] hover:bg-[#1B365D] text-[#dfb559] text-[12px] font-serif font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ml-auto"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#dfb559]" />
+                  <span>{lang === "es" ? "Descargar Archivo .TXT" : "Download .TXT File"}</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

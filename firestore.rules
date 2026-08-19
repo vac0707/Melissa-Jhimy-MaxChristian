@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Guestbook signatures can be read and written by all guests of the wedding
+    match /guestbook_signatures/{signatureId} {
+      allow read, write: if true;
+    }
+    
+    // Collaborative album photos can be read and written by all guests
+    match /album_photos/{photoId} {
+      allow read, write: if true;
+    }
+  }
+}

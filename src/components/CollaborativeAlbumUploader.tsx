@@ -127,7 +127,7 @@ export default function CollaborativeAlbumUploader({ onBackToInvitation }: Uploa
       });
     }
 
-    albumStorage.addPhotos(convertedItems);
+    await albumStorage.addPhotos(convertedItems);
 
     setIsUploading(false);
     setUploadSuccess(true);

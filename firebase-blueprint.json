@@ -1,0 +1,27 @@
+{
+  "entities": {
+    "guestbook_signatures": {
+      "description": "Dedicatorias y firmas de los invitados para Melissa, Jhimy y Max Christian",
+      "fields": {
+        "id": { "type": "string", "description": "ID único de la firma" },
+        "name": { "type": "string", "description": "Nombre de quien dedica" },
+        "message": { "type": "string", "description": "Mensaje de felicitación y bendición" },
+        "stamp": { "type": "string", "description": "Emoji o sello seleccionado" },
+        "date": { "type": "string", "description": "Fecha y hora legible" },
+        "likes": { "type": "number", "description": "Contador de me gusta" },
+        "createdAt": { "type": "number", "description": "Timestamp en milisegundos para ordenamiento" }
+      }
+    },
+    "album_photos": {
+      "description": "Fotos colaborativas subidas por los invitados",
+      "fields": {
+        "id": { "type": "string", "description": "ID único de la foto" },
+        "url": { "type": "string", "description": "URL o base64 de la imagen" },
+        "uploader": { "type": "string", "description": "Nombre del invitado" },
+        "category": { "type": "string", "description": "Categoría (familia, amigos, etc.)" },
+        "caption": { "type": "string", "description": "Descripción opcional" },
+        "timestamp": { "type": "number", "description": "Timestamp de subida" }
+      }
+    }
+  }
+}

@@ -1,4 +1,15 @@
 import { UploadedPhoto, PhotoCategory } from "../types/album";
+import { db } from "./firebase";
+import { 
+  collection, 
+  onSnapshot, 
+  addDoc, 
+  doc, 
+  updateDoc, 
+  increment, 
+  query, 
+  orderBy 
+} from "firebase/firestore";
 
 const STORAGE_KEY = "melissa_jhimy_collaborative_album_v1";
 
@@ -61,13 +72,57 @@ const INITIAL_PHOTOS: UploadedPhoto[] = [
 
 type Listener = () => void;
 const listeners = new Set<Listener>();
+let firestorePhotos: UploadedPhoto[] = [];
+let isFirestoreSynced = false;
 
 function notify() {
   listeners.forEach((cb) => cb());
 }
 
+// Start listening to Firestore photos collection
+try {
+  const photosQuery = query(
+    collection(db, "album_photos"),
+    orderBy("timestamp", "desc")
+  );
+
+  onSnapshot(
+    photosQuery,
+    (snapshot) => {
+      isFirestoreSynced = true;
+      const cloudPhotos: UploadedPhoto[] = snapshot.docs.map((docSnap) => {
+        const d = docSnap.data();
+        return {
+          id: docSnap.id,
+          url: d.url,
+          category: d.category || "familia",
+          uploaderName: d.uploader || "Invitado",
+          caption: d.caption || "",
+          likes: typeof d.likes === "number" ? d.likes : 0,
+          createdAt: d.createdAt || "Hoy",
+        };
+      });
+
+      firestorePhotos = cloudPhotos;
+      notify();
+    },
+    (err) => {
+      console.warn("Firestore album sync warning:", err);
+    }
+  );
+} catch (e) {
+  console.warn("Error initializing Firestore photos listener:", e);
+}
+
 export const albumStorage = {
   getPhotos(): UploadedPhoto[] {
+    if (isFirestoreSynced && firestorePhotos.length > 0) {
+      // Merge initial gallery seeds with newly uploaded cloud photos
+      const seedIds = new Set(INITIAL_PHOTOS.map((p) => p.id));
+      const filteredCloud = firestorePhotos.filter((p) => !seedIds.has(p.id));
+      return [...filteredCloud, ...INITIAL_PHOTOS];
+    }
+
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -79,49 +134,71 @@ export const albumStorage = {
     return INITIAL_PHOTOS;
   },
 
-  addPhotos(
+  async addPhotos(
     newItems: Array<{
       url: string;
       category: PhotoCategory;
       uploaderName: string;
       caption?: string;
     }>
-  ): void {
-    const current = this.getPhotos();
-    const formatted: UploadedPhoto[] = newItems.map((item, idx) => ({
-      id: `photo-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 6)}`,
-      url: item.url,
-      category: item.category,
-      uploaderName: item.uploaderName.trim() || "Invitado Especial",
-      caption: item.caption?.trim() || "",
-      likes: 0,
-      createdAt: new Date().toLocaleDateString("es-ES", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }),
-    }));
+  ): Promise<void> {
+    const formattedDate = new Date().toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
 
-    const updated = [...formatted, ...current];
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    } catch (e) {
-      console.warn("Storage quota warning:", e);
+    for (const item of newItems) {
+      try {
+        await addDoc(collection(db, "album_photos"), {
+          url: item.url,
+          category: item.category,
+          uploader: item.uploaderName.trim() || "Invitado Especial",
+          caption: item.caption?.trim() || "",
+          likes: 0,
+          createdAt: formattedDate,
+          timestamp: Date.now(),
+        });
+      } catch (err) {
+        console.error("Error saving photo to Firestore:", err);
+        // Fallback local save
+        const current = this.getPhotos();
+        const fallbackPhoto: UploadedPhoto = {
+          id: `photo-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+          url: item.url,
+          category: item.category,
+          uploaderName: item.uploaderName.trim() || "Invitado Especial",
+          caption: item.caption?.trim() || "",
+          likes: 0,
+          createdAt: formattedDate,
+        };
+        const updated = [fallbackPhoto, ...current];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      }
     }
+
     notify();
   },
 
-  toggleLike(id: string): void {
-    const current = this.getPhotos();
-    const updated = current.map((photo) => {
-      if (photo.id === id) {
-        return { ...photo, likes: photo.likes + 1 };
-      }
-      return photo;
-    });
+  async toggleLike(id: string): Promise<void> {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    } catch {}
+      const docRef = doc(db, "album_photos", id);
+      await updateDoc(docRef, {
+        likes: increment(1),
+      });
+    } catch {
+      // Fallback local like
+      const current = this.getPhotos();
+      const updated = current.map((photo) => {
+        if (photo.id === id) {
+          return { ...photo, likes: photo.likes + 1 };
+        }
+        return photo;
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      } catch {}
+    }
     notify();
   },
 
@@ -130,3 +207,4 @@ export const albumStorage = {
     return () => listeners.delete(listener);
   },
 };
+
