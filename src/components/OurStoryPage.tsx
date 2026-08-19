@@ -11,7 +11,7 @@ const STORY_PHOTOS = [
   },
   {
     id: "story-2",
-    url: "https://res.cloudinary.com/lfwlqotz/image/upload/v1787082602/02.jpg",
+    url: "https://res.cloudinary.com/lfwlqotz/image/upload/v1787098120/ii.png",
     alt: "Nuestra historia - Momento 2",
   },
   {
