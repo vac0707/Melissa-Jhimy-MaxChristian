@@ -29,10 +29,10 @@ export default function RSVPForm() {
       ? (formData.manualAsistentes.trim() || "1")
       : formData.asistentes;
 
-    // Elegant message formatting for direct delivery on WhatsApp
+    // Elegant message formatting with rich icons for direct delivery on WhatsApp
     const msgTemplate = lang === "es"
-      ? `¡Hola Melissa y Jhimy! ✨💍🕊️\n\nConfirmo con mucha alegría mi asistencia a su matrimonio y bautizo de Max Christian este lunes 7 de setiembre del 2026.\n\n*Detalles de Confirmación:*\n👤 *Nombre:* ${formData.nombre.trim()}\n👥 *Pases/Asistentes:* ${numAsistentes}\n\n¡Nos vemos pronto para celebrar juntos! 🎉`
-      : `Hello Melissa and Jhimy! ✨💍🕊️\n\nI am very happy to confirm my attendance to your wedding and Max Christian's baptism this Monday, September 7th, 2026.\n\n*Confirmation Details:*\n👤 *Name:* ${formData.nombre.trim()}\n👥 *Guests:* ${numAsistentes}\n\nSee you soon to celebrate together! 🎉`;
+      ? `💍🕊️ *CONFIRMACIÓN DE ASISTENCIA* 🕊️💍\n*Boda de Melissa & Jhimy y Bautizo de Max Christian*\n📅 *Fecha:* Lunes, 7 de Setiembre 2026\n📍 *Lugar:* Abancay, Perú\n\n✨ *¡Hola Melissa y Jhimy!* ✨\nCon mucha alegría y emoción confirmo mi asistencia para celebrar junto a ustedes este día tan especial. 🥂🎉\n\n📋 *DETALLES:* \n👤 *Invitado(s):* ${formData.nombre.trim()}\n👥 *Pases / Asistentes:* ${numAsistentes} persona(s)\n✅ *Estado:* ¡Confirmado con entusiasmo!\n\n¡Nos vemos pronto para celebrar su amor y bendición! 💖✨🍾`
+      : `💍🕊️ *RSVP CONFIRMATION* 🕊️💍\n*Melissa & Jhimy's Wedding & Max Christian's Baptism*\n📅 *Date:* Monday, September 7, 2026\n📍 *Location:* Abancay, Peru\n\n✨ *Hello Melissa & Jhimy!* ✨\nI am thrilled to confirm my attendance to celebrate this wonderful day together! 🥂🎉\n\n📋 *DETAILS:* \n👤 *Guest Name:* ${formData.nombre.trim()}\n👥 *Passes / Attendees:* ${numAsistentes} person(s)\n✅ *Status:* Confirmed!\n\nSee you soon to celebrate together! 💖✨🍾`;
 
     const encodedText = encodeURIComponent(msgTemplate);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodedText}`;

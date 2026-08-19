@@ -12,17 +12,31 @@ export default function RSVPPage() {
   const [manualAsistentes, setManualAsistentes] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const phoneNum = "51966740525";
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!nombre.trim()) return;
 
-    const totalPersonas = asistentes === "otro" ? manualAsistentes || "1" : asistentes;
-    const mensaje = asistencia === "si"
-      ? `¡Hola! Confirmo con mucha alegría mi asistencia a la Boda de Melissa y Jhimy y Bautizo de Max Christian. Nombre: ${nombre.trim()} (${totalPersonas} personas).`
-      : `¡Hola Melissa y Jhimy! Lamentablemente no podré asistir a su celebración. Les deseo lo mejor de corazón. Nombre: ${nombre.trim()}.`;
+    const totalPersonas = asistentes === "otro" ? manualAsistentes.trim() || "1" : asistentes;
+    
+    let mensaje = "";
+    if (lang === "es") {
+      if (asistencia === "si") {
+        mensaje = `💍🕊️ *CONFIRMACIÓN DE ASISTENCIA* 🕊️💍\n*Boda de Melissa & Jhimy y Bautizo de Max Christian*\n📅 *Fecha:* Lunes, 7 de Setiembre 2026\n📍 *Lugar:* Abancay, Perú\n\n✨ *¡Hola Melissa y Jhimy!* ✨\nCon mucha alegría y emoción confirmo mi asistencia para celebrar juntos este día tan bendecido y especial. 🥂🎉\n\n📋 *DETALLES:* \n👤 *Invitado(s):* ${nombre.trim()}\n👥 *Pases / Asistentes:* ${totalPersonas} persona(s)\n✅ *Estado:* ¡Confirmado con mucha alegría!\n\n¡Nos vemos pronto para celebrar su amor y bendición! 💖✨🍾`;
+      } else {
+        mensaje = `💍🕊️ *RESPUESTA DE ASISTENCIA* 🕊️💍\n*Boda de Melissa & Jhimy y Bautizo de Max Christian*\n\n✨ *¡Hola Melissa y Jhimy!* ✨\nMuchas gracias por la hermosa invitación. Lamentablemente no podré acompañarlos en esta ocasión, pero les envío todo mi cariño y mejores deseos. 🤍🙏\n\n📋 *DATOS:* \n👤 *Nombre:* ${nombre.trim()}\n❌ *Estado:* No podré asistir\n\n¡Que Dios bendiga siempre su unión y el bautizo de Max Christian con mucho amor y felicidad! 🕊️💖✨`;
+      }
+    } else {
+      if (asistencia === "si") {
+        mensaje = `💍🕊️ *RSVP CONFIRMATION* 🕊️💍\n*Melissa & Jhimy's Wedding & Max Christian's Baptism*\n📅 *Date:* Monday, September 7, 2026\n📍 *Location:* Abancay, Peru\n\n✨ *Hello Melissa & Jhimy!* ✨\nI am thrilled to confirm my attendance to celebrate this wonderful and blessed day together! 🥂🎉\n\n📋 *DETAILS:* \n👤 *Guest Name:* ${nombre.trim()}\n👥 *Passes / Attendees:* ${totalPersonas} person(s)\n✅ *Status:* Confirmed!\n\nSee you soon to celebrate together! 💖✨🍾`;
+      } else {
+        mensaje = `💍🕊️ *RSVP RESPONSE* 🕊️💍\n*Melissa & Jhimy's Wedding & Max Christian's Baptism*\n\n✨ *Hello Melissa & Jhimy!* ✨\nThank you so much for the lovely invitation. Unfortunately I won't be able to attend, but I send you all my love and best wishes. 🤍🙏\n\n📋 *DETAILS:* \n👤 *Name:* ${nombre.trim()}\n❌ *Status:* Cannot attend\n\nMay God bless your union and Max Christian's baptism with immense love and happiness! 🕊️💖✨`;
+      }
+    }
 
-    const whatsappUrl = `https://wa.me/51980852503?text=${encodeURIComponent(mensaje)}`;
-    window.open(whatsappUrl, "_blank");
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(mensaje)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     setIsSuccess(true);
   };
 
