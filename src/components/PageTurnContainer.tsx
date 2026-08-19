@@ -91,7 +91,7 @@ export default function PageTurnContainer({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentPage, totalPages]);
 
-  // Touch swipe handling
+  // Touch swipe handling with directional threshold
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -103,7 +103,7 @@ export default function PageTurnContainer({
     const deltaY = e.changedTouches[0].clientY - touchStartY.current;
 
     // Only trigger if horizontal swipe is significantly stronger than vertical scroll
-    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.3) {
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25) {
       if (deltaX < 0) {
         handleNext();
       } else {
@@ -114,41 +114,50 @@ export default function PageTurnContainer({
     touchStartY.current = null;
   };
 
-  // Ultra-fluid 3D book page curl and slide variants
-  const pageVariants = {
+  // 3-Second Cinematic 3D Virtual Book Page Flip Animation Variants
+  const bookPageVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
+      rotateY: dir > 0 ? 65 : -65,
+      x: dir > 0 ? "40%" : "-40%",
       opacity: 0,
-      scale: 0.98,
-      rotateY: dir > 0 ? 12 : -12,
+      scale: 0.92,
       transformOrigin: dir > 0 ? "left center" : "right center",
+      boxShadow: dir > 0 
+        ? "-40px 0 60px rgba(0, 0, 0, 0.5), 0 25px 50px rgba(0, 0, 0, 0.35)" 
+        : "40px 0 60px rgba(0, 0, 0, 0.5), 0 25px 50px rgba(0, 0, 0, 0.35)",
       zIndex: 2,
     }),
     center: {
+      rotateY: 0,
       x: 0,
       opacity: 1,
       scale: 1,
-      rotateY: 0,
       zIndex: 2,
       transformOrigin: "center center",
+      boxShadow: "0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15)",
       transition: {
-        x: { type: "spring", stiffness: 300, damping: 30, mass: 0.7 },
-        opacity: { duration: 0.28 },
-        scale: { duration: 0.35 },
-        rotateY: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+        rotateY: { duration: 3.0, ease: [0.25, 1, 0.4, 1] },
+        x: { duration: 2.9, ease: [0.25, 1, 0.4, 1] },
+        opacity: { duration: 2.2, ease: [0.25, 1, 0.4, 1] },
+        scale: { duration: 2.9, ease: [0.25, 1, 0.4, 1] },
+        boxShadow: { duration: 2.8 },
       },
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? "-25%" : "25%",
+      rotateY: dir > 0 ? -70 : 70,
+      x: dir > 0 ? "-40%" : "40%",
       opacity: 0,
-      scale: 0.97,
-      rotateY: dir > 0 ? -12 : 12,
+      scale: 0.91,
       zIndex: 1,
       transformOrigin: dir > 0 ? "left center" : "right center",
+      boxShadow: dir > 0 
+        ? "40px 0 60px rgba(0, 0, 0, 0.55)" 
+        : "-40px 0 60px rgba(0, 0, 0, 0.55)",
       transition: {
-        x: { duration: 0.32, ease: [0.25, 1, 0.5, 1] },
-        opacity: { duration: 0.22 },
-        scale: { duration: 0.3 },
+        rotateY: { duration: 2.8, ease: [0.3, 0, 0.7, 1] },
+        x: { duration: 2.8, ease: [0.3, 0, 0.7, 1] },
+        opacity: { duration: 2.0, ease: [0.3, 0, 0.7, 1] },
+        scale: { duration: 2.8 },
       },
     }),
   };
@@ -157,11 +166,14 @@ export default function PageTurnContainer({
 
   return (
     <div 
-      className="relative min-h-[100svh] w-full bg-[#11223B] overflow-x-hidden"
+      className="relative min-h-[100svh] w-full bg-[#0d1b2e] overflow-x-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      style={{ perspective: "2000px" }}
+      style={{ perspective: "2200px" }}
     >
+      {/* Subtle Book Spine Center Ambience / Background Texture */}
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(27,54,93,0.4)_0%,rgba(10,20,35,0.95)_100%)] z-0" />
+
       {/* Top Floating Mini Header with Page Title & Index Menu Trigger */}
       <header className="fixed top-3 inset-x-0 z-40 px-3 sm:px-6 pointer-events-none flex items-center justify-between max-w-5xl mx-auto">
         {/* Left: Quick Home / Cover button */}
@@ -188,24 +200,36 @@ export default function PageTurnContainer({
         </button>
       </header>
 
-      {/* Main 3D Animated Page Screen - using popLayout for seamless zero-latency overlap */}
-      <main className="relative w-full min-h-[100svh] flex flex-col justify-center items-center overflow-hidden">
+      {/* Main 3D Animated Virtual Book Page Screen */}
+      <main className="relative w-full min-h-[100svh] flex flex-col justify-center items-center overflow-hidden z-10">
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={activePage?.id || currentPage}
             custom={direction}
-            variants={pageVariants}
+            variants={bookPageVariants}
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full min-h-[100svh] relative flex flex-col justify-center"
+            className="w-full min-h-[100svh] relative flex flex-col justify-center origin-center"
             style={{ 
               transformStyle: "preserve-3d",
               willChange: "transform, opacity",
               backfaceVisibility: "hidden",
             }}
           >
-            {activePage?.component}
+            {/* Smooth 3-second Content Reveal for Soft, Luxurious Entrance */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 2.4, delay: 0.3, ease: [0.25, 1, 0.4, 1] }}
+              className="w-full h-full flex flex-col justify-center"
+            >
+              {activePage?.component}
+            </motion.div>
+
+            {/* Subtle Virtual Book Binding Spine Shadow on Side Edges */}
+            <div className="absolute inset-y-0 left-0 w-6 sm:w-10 pointer-events-none bg-gradient-to-r from-black/15 via-black/5 to-transparent z-20" />
+            <div className="absolute inset-y-0 right-0 w-6 sm:w-10 pointer-events-none bg-gradient-to-l from-black/15 via-black/5 to-transparent z-20" />
           </motion.div>
         </AnimatePresence>
       </main>
