@@ -16,25 +16,17 @@ export default function Schedule() {
       descEs: "Catedral de Abancay",
       icon: (
         <svg viewBox="0 0 100 100" fill="none" stroke="#1B365D" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-[48px] h-[48px] sm:w-[58px] sm:h-[58px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(27,54,93,0.1)]">
-          {/* Ground line */}
           <line x1="10" y1="90" x2="90" y2="90" strokeWidth="1" />
-          {/* Main church building facade */}
           <path d="M35 90 V50 L50 30 L65 50 V90" />
           <path d="M35 50 H65" strokeWidth="0.8" />
-          {/* Left annex */}
           <path d="M15 90 V65 L35 50" />
-          {/* Right annex */}
           <path d="M65 50 L85 65 V90" />
-          {/* Door */}
           <path d="M44 90 V75 C44 70, 56 70, 56 75 V90" />
           <line x1="50" y1="70" x2="50" y2="90" strokeWidth="0.8" />
-          {/* Steeple tower rising middle */}
           <path d="M47 34 V15 H53 V34" />
           <path d="M47 15 L50 5 L53 15" />
-          {/* Windows */}
           <path d="M42 58 V66" strokeWidth="0.8" />
           <path d="M58 58 V66" strokeWidth="0.8" />
-          {/* Cross */}
           <line x1="50" y1="5" x2="50" y2="-5" strokeWidth="1.3" />
           <line x1="46" y1="-1" x2="54" y2="-1" strokeWidth="1.3" />
         </svg>
@@ -187,7 +179,7 @@ export default function Schedule() {
       <div className="max-w-2xl w-full mx-auto relative z-10 my-auto">
         
         {/* Title "Itinerario" in Calligraphy Script */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +187,7 @@ export default function Schedule() {
             transition={{ duration: 1 }}
             className="flex flex-col items-center"
           >
-            <h2 className="font-great-vibes text-7xl sm:text-8xl text-[#1B365D] select-none leading-none mb-2">
+            <h2 className="font-great-vibes text-[56px] sm:text-[76px] md:text-[84px] text-[#1B365D] select-none leading-none mb-2 font-normal">
               {lang === "es" ? "Itinerario" : "Schedule"}
             </h2>
             {/* Center line small floral flourish */}
@@ -234,14 +226,14 @@ export default function Schedule() {
                       >
                         {/* Information texts: Time & Title */}
                         <div className="flex flex-col">
-                          <span className="font-serif text-[11px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
+                          <span className="font-serif text-[12px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
                             {item.time}
                           </span>
-                          <span className="font-serif font-bold text-[12.5px] sm:text-[14.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
+                          <span className="font-serif font-bold text-[13.5px] sm:text-[15.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
                             {lang === "es" ? item.titleEs : item.titleEn}
                           </span>
                           {item.descEs && (
-                            <span className="text-[10px] sm:text-[11px] text-[#1B365D]/70 font-sans mt-0.5">
+                            <span className="text-[11px] sm:text-[12px] text-[#1B365D]/80 font-sans mt-0.5">
                               {item.descEs}
                             </span>
                           )}
@@ -278,14 +270,14 @@ export default function Schedule() {
 
                         {/* Information texts: Time & Title */}
                         <div className="flex flex-col">
-                          <span className="font-serif text-[11px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
+                          <span className="font-serif text-[12px] sm:text-xs tracking-wider text-[#c5a059] font-bold leading-none mb-1">
                             {item.time}
                           </span>
-                          <span className="font-serif font-bold text-[12.5px] sm:text-[14.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
+                          <span className="font-serif font-bold text-[13.5px] sm:text-[15.5px] uppercase tracking-[0.16em] text-[#1B365D] leading-tight">
                             {lang === "es" ? item.titleEs : item.titleEn}
                           </span>
                           {item.descEs && (
-                            <span className="text-[10px] sm:text-[11px] text-[#1B365D]/70 font-sans mt-0.5">
+                            <span className="text-[11px] sm:text-[12px] text-[#1B365D]/80 font-sans mt-0.5">
                               {item.descEs}
                             </span>
                           )}
@@ -310,7 +302,7 @@ export default function Schedule() {
         >
           <div className="w-16 h-[0.7px] bg-[#dfb559]/40 mb-5" />
 
-          <h3 className="font-serif text-[13.5px] sm:text-[16px] font-bold text-[#1B365D] uppercase tracking-[0.2em] select-none">
+          <h3 className="font-serif text-[14.5px] sm:text-[17px] font-bold text-[#1B365D] uppercase tracking-[0.2em] select-none">
             {lang === "es" ? "¡CELEBRACIÓN Y FIESTA INOLVIDABLE!" : "¡UNFORGETTABLE CELEBRATION!"}
           </h3>
 

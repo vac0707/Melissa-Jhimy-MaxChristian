@@ -48,17 +48,17 @@ export default function OurStoryPage() {
         >
           <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1.5">
             <Sparkles className="w-3.5 h-3.5" />
-            <span className="font-sans text-[9.5px] sm:text-[11px] tracking-[0.3em] uppercase font-bold text-[#c5a059]">
+            <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.3em] uppercase font-bold text-[#c5a059]">
               {lang === "es" ? "Capítulo I" : "Chapter I"}
             </span>
             <Sparkles className="w-3.5 h-3.5" />
           </div>
 
-          <h2 className="font-great-vibes text-5xl sm:text-7xl text-[#1B365D] leading-none mb-2 select-none">
+          <h2 className="font-great-vibes text-[54px] sm:text-[76px] md:text-[84px] text-[#1B365D] leading-none mb-2 select-none font-normal">
             {lang === "es" ? "Nuestra Historia" : "Our Story"}
           </h2>
 
-          <p className="font-serif text-xs sm:text-sm text-[#1B365D]/80 italic tracking-wider font-light">
+          <p className="font-serif text-[13.5px] sm:text-[15px] text-[#1B365D]/85 italic tracking-wider font-normal">
             {lang === "es" ? "Cada momento nos trajo hasta aquí" : "Every moment brought us here"}
           </p>
 
@@ -104,7 +104,7 @@ export default function OurStoryPage() {
             <div className="w-8 h-[0.5px] bg-[#dfb559]/50" />
           </div>
 
-          <p className="font-serif text-[13px] sm:text-[15px] md:text-[16px] text-[#1B365D] font-medium leading-relaxed italic">
+          <p className="font-serif text-[15px] sm:text-[16.5px] md:text-[17px] text-[#1B365D] font-medium leading-relaxed italic">
             “El amor nos unió, Dios bendijo nuestro hogar y nuestra historia encontró su mayor regalo en nuestro hijo Max Christian.”
           </p>
         </motion.div>

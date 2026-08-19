@@ -91,7 +91,7 @@ export default function FinalPage() {
         </motion.div>
 
         {/* Heart icon */}
-        <Heart className="w-4 h-4 text-[#dfb559] mb-3 animate-pulse" />
+        <Heart className="w-4.5 h-4.5 text-[#dfb559] mb-3 animate-pulse" />
 
         {/* Main message */}
         <motion.p
@@ -99,17 +99,17 @@ export default function FinalPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-serif text-[15px] sm:text-lg font-light text-[#FAF6F0] tracking-wide max-w-lg mb-3 leading-relaxed italic px-2"
+          className="font-serif text-[16px] sm:text-lg font-light text-[#FAF6F0] tracking-wide max-w-lg mb-3 leading-relaxed italic px-2"
         >
           “Gracias por ser parte de nuestra historia y por acompañarnos en este nuevo capitulo de nuestras vidas.”
         </motion.p>
 
         {/* Con cariño signature (separated in 2 distinct lines) */}
         <div className="mb-5 flex flex-col items-center gap-1">
-          <p className="text-[#c5a059] text-[13px] sm:text-[15px] font-serif italic tracking-wider">
+          <p className="text-[#c5a059] text-[15px] sm:text-[16.5px] font-serif italic tracking-wider">
             Con cariño,
           </p>
-          <p className="text-[#dfb559] text-[12.5px] sm:text-[14px] tracking-[0.22em] font-serif font-bold uppercase">
+          <p className="text-[#dfb559] text-[14px] sm:text-[15.5px] tracking-[0.22em] font-serif font-bold uppercase">
             Melissa, Jhimy y Max Christian
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function FinalPage() {
         <div className="mb-6">
           <button
             onClick={handleShare}
-            className="flex items-center gap-2 px-5 py-2 rounded-full border border-[#dfb559]/60 bg-[#1B365D]/90 hover:bg-[#1B365D] text-[10.5px] font-bold text-gray-100 hover:text-white uppercase tracking-widest transition-all cursor-pointer shadow-md active:scale-95"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#dfb559]/60 bg-[#1B365D]/90 hover:bg-[#1B365D] text-xs sm:text-[13px] font-bold text-gray-100 hover:text-white uppercase tracking-widest transition-all cursor-pointer shadow-md active:scale-95"
             title="Compartir Invitación"
           >
             {copied ? (
@@ -139,18 +139,18 @@ export default function FinalPage() {
         <div className="w-20 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/40 to-transparent mb-4" />
 
         {/* Location subtitle */}
-        <p className="text-[9.5px] text-gray-300 uppercase tracking-[0.25em] font-light mb-4">
+        <p className="text-[10.5px] sm:text-xs text-gray-300 uppercase tracking-[0.22em] font-medium mb-4">
           7 de Setiembre 2026 • Abancay, Perú | Todos los derechos reservados © 2026
         </p>
 
         {/* Designer Credits */}
         <div className="pt-4 border-t border-[#dfb559]/15 w-full max-w-md flex flex-col items-center">
-          <span className="text-[9px] uppercase tracking-[0.3em] text-[#c5a059] font-bold mb-1">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#c5a059] font-bold mb-1">
             {lang === "es" ? "Invitaciones Virtuales & Diseño Gráfico" : "Virtual Invitations & Graphic Design"}
           </span>
-          <p className="font-serif text-xs text-gray-300 tracking-wide font-light mb-3">
+          <p className="font-serif text-[12.5px] sm:text-sm text-gray-300 tracking-wide font-light mb-3">
             {lang === "es" ? "Creado con amor por " : "Created with love by "}
-            <span className="text-white font-medium">VAC Creative</span>
+            <span className="text-white font-semibold">VAC Creative</span>
           </p>
 
           {/* Social Media Links Row */}
@@ -159,7 +159,7 @@ export default function FinalPage() {
               href={`https://wa.me/51932350348?text=${encodeURIComponent(designerMsg)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 text-[#25D366] text-[9.5px] font-bold uppercase tracking-wider transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 hover:bg-[#25D366]/30 text-[#25D366] text-[10.5px] font-bold uppercase tracking-wider transition-all"
             >
               <span>WhatsApp</span>
             </a>
@@ -168,7 +168,7 @@ export default function FinalPage() {
               href="https://www.tiktok.com/@vaccreative?is_from_webapp=1&sender_device=pc"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white text-gray-300 text-[9.5px] font-bold uppercase tracking-wider transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white text-gray-200 text-[10.5px] font-bold uppercase tracking-wider transition-all"
             >
               <span>TikTok</span>
             </a>
@@ -177,7 +177,7 @@ export default function FinalPage() {
               href="https://www.facebook.com/VAC.Creativ"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/30 hover:bg-[#1877F2]/20 text-[#1877F2] text-[9.5px] font-bold uppercase tracking-wider transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1877F2]/15 border border-[#1877F2]/40 hover:bg-[#1877F2]/30 text-[#4c97f8] text-[10.5px] font-bold uppercase tracking-wider transition-all"
             >
               <span>Facebook</span>
             </a>
@@ -186,7 +186,7 @@ export default function FinalPage() {
               href="https://www.youtube.com/@VACCreative"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/30 hover:bg-[#FF0000]/20 text-[#FF0000] text-[9.5px] font-bold uppercase tracking-wider transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FF0000]/15 border border-[#FF0000]/40 hover:bg-[#FF0000]/30 text-[#ff5757] text-[10.5px] font-bold uppercase tracking-wider transition-all"
             >
               <span>YouTube</span>
             </a>

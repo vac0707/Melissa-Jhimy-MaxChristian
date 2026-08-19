@@ -24,22 +24,22 @@ export default function CeremonyPage() {
           className="flex flex-col items-center mb-6"
         >
           {/* Vector Church Line Icon */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#132742] border-2 border-[#dfb559] flex items-center justify-center text-[#dfb559] mb-4 shadow-lg">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#132742] border-2 border-[#dfb559] flex items-center justify-center text-[#dfb559] mb-3 shadow-lg">
             <Church className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
 
-          <span className="font-sans text-[9.5px] sm:text-[11px] tracking-[0.3em] uppercase font-bold text-[#c5a059] mb-1">
+          <span className="font-sans text-[11px] sm:text-[12.5px] tracking-[0.25em] uppercase font-bold text-[#c5a059] mb-1">
             {lang === "es" ? "Ceremonia Religiosa" : "Religious Ceremony"}
           </span>
 
-          <h2 className="font-great-vibes text-5xl sm:text-7.5xl text-[#1B365D] leading-none mb-2 select-none">
+          <h2 className="font-great-vibes text-[50px] sm:text-[68px] md:text-[76px] text-[#1B365D] leading-[1.1] mb-2 select-none font-normal">
             {lang === "es" ? "Misa de Matrimonio y Bautizo" : "Wedding & Baptism Mass"}
           </h2>
 
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-4" />
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/50 mt-1 mb-4" />
 
           {/* Emotional Phrase */}
-          <p className="font-serif text-[13.5px] sm:text-[15.5px] text-[#1B365D]/85 italic max-w-lg leading-relaxed font-light px-4">
+          <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 italic max-w-lg leading-relaxed font-medium px-4">
             “Acompáñanos en este momento tan especial donde unimos nuestras vidas ante Dios y presentamos a nuestro hijo en su bautizo.”
           </p>
         </motion.div>
@@ -58,14 +58,14 @@ export default function CeremonyPage() {
             <div className="flex flex-col items-center">
               <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
                 <Clock className="w-4 h-4" />
-                <span className="text-[10.5px] uppercase tracking-widest font-bold">
+                <span className="text-[11.5px] sm:text-[12.5px] uppercase tracking-widest font-bold">
                   {lang === "es" ? "Hora Exacta" : "Exact Time"}
                 </span>
               </div>
-              <p className="font-serif text-xl sm:text-2xl font-bold text-[#1B365D]">
+              <p className="font-serif text-2xl sm:text-2.5xl font-bold text-[#1B365D]">
                 02:00 PM
               </p>
-              <span className="text-[11px] text-[#1B365D]/70 font-sans tracking-wide">
+              <span className="text-[12px] sm:text-[13px] text-[#1B365D]/75 font-sans tracking-wide">
                 {lang === "es" ? "Lunes, 7 de Setiembre del 2026" : "Monday, September 7, 2026"}
               </span>
             </div>
@@ -76,14 +76,14 @@ export default function CeremonyPage() {
             <div className="flex flex-col items-center">
               <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
                 <MapPin className="w-4 h-4" />
-                <span className="text-[10.5px] uppercase tracking-widest font-bold">
+                <span className="text-[11.5px] sm:text-[12.5px] uppercase tracking-widest font-bold">
                   {lang === "es" ? "Lugar Sagrado" : "Sacred Venue"}
                 </span>
               </div>
-              <p className="font-serif text-lg sm:text-xl font-bold text-[#1B365D]">
+              <p className="font-serif text-xl sm:text-2xl font-bold text-[#1B365D]">
                 Catedral de Abancay
               </p>
-              <span className="text-[12px] text-[#1B365D]/75 font-serif italic">
+              <span className="text-[13px] sm:text-[14px] text-[#1B365D]/80 font-serif italic">
                 Plaza Mayor de Abancay, Apurímac
               </span>
             </div>
@@ -94,7 +94,7 @@ export default function CeremonyPage() {
                 href={churchMapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#132742] hover:bg-[#1B365D] text-[#dfb559] border border-[#dfb559]/40 text-xs font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-[#132742] hover:bg-[#1B365D] text-[#dfb559] border border-[#dfb559]/40 text-xs sm:text-[13px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
                 <MapPin className="w-3.5 h-3.5" />
                 <span>{lang === "es" ? "Ver Ubicación" : "View Map"}</span>
@@ -105,7 +105,7 @@ export default function CeremonyPage() {
                 href={churchCalendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/50 text-xs font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/50 text-xs sm:text-[13px] font-sans font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
                 <Calendar className="w-3.5 h-3.5 text-[#c5a059]" />
                 <span>{lang === "es" ? "Agendar" : "Add Calendar"}</span>

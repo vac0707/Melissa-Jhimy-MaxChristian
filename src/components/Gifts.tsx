@@ -1,141 +1,164 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Check, Copy, Gift } from "lucide-react";
-import { useLanguage } from "../hooks/useLanguage";
+import { motion } from "motion/react";
+import { Mail, Copy, Check, Gift, Sparkles, Building2, Smartphone } from "lucide-react";
 import PageFloralFrame from "./PageFloralFrame";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function Gifts() {
   const { lang } = useLanguage();
-  const [copiedValue, setCopiedValue] = useState<string | null>(null);
+  const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
 
-  const copyToClipboard = async (text: string, label: string) => {
-    try {
-      const cleanText = text.replace(/[^0-9]/g, "");
-      await navigator.clipboard.writeText(cleanText);
-      setCopiedValue(label);
-      setTimeout(() => setCopiedValue(null), 2000);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
+  const bcpAccount = "20096500288018";
+  const bcpCci = "00220019650028801848";
+  const yapePlinPhone = "980 852 503";
+
+  const handleCopy = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedAccount(label);
+    setTimeout(() => setCopiedAccount(null), 2500);
   };
 
-  const giftAccounts = [
-    {
-      owner: "Jhimy Camacho & Melissa Retamoso",
-      items: [
-        { label: "Yape / Plin", value: "980 852 503" },
-        { label: "BCP Soles", value: "20096500288018" },
-        { label: "CCI Interbancaria", value: "00220019650028801848" }
-      ]
-    }
-  ];
-
   return (
-    <section className="relative min-h-[100svh] w-full py-12 sm:py-16 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden flex flex-col justify-center items-center">
-      {/* Floral corners frame */}
+    <section className="relative min-h-[100svh] py-14 sm:py-18 px-4 sm:px-6 bg-[#FAF6F0] overflow-hidden text-[#1B365D] flex flex-col justify-center items-center">
+      {/* Floral Corners Frame */}
       <PageFloralFrame variant="light" showBottomRight={true} />
 
-      <div className="max-w-xl w-full mx-auto relative z-10 flex flex-col items-center my-auto">
+      {/* Background Soft Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06)_0%,transparent_75%)] pointer-events-none" />
+
+      <div className="max-w-2xl w-full mx-auto relative z-10 flex flex-col items-center my-auto">
         
-        {/* Header */}
+        {/* Vector Line Art Envelope / Gift Icon in Gold */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-4 sm:mb-6"
+          className="relative mb-4 flex items-center justify-center select-none"
         >
-          <Gift className="w-5 h-5 text-[#dfb559] mx-auto mb-2" />
-          <span className="font-sans text-[9.5px] sm:text-[10.5px] tracking-[0.35em] text-[#c5a059] uppercase font-bold block mb-1">
-            {lang === "es" ? "Muestra de Cariño" : "Token of Love"}
-          </span>
-          <h2 className="font-great-vibes text-5xl sm:text-7.5xl text-[#1B365D] select-none leading-none mb-2">
-            {lang === "es" ? "Lluvia de Sobres / Regalos" : "Wedding Gifts"}
-          </h2>
-          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mx-auto" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#132742] border-2 border-[#dfb559] flex items-center justify-center text-[#dfb559] shadow-lg">
+            <Mail className="w-8 h-8 sm:w-10 sm:h-10" />
+          </div>
         </motion.div>
 
-        {/* Message Intro */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.1 }}
-          className="text-center mb-6 px-2"
+          transition={{ duration: 1, delay: 0.1 }}
+          className="text-center w-full flex flex-col items-center mb-6"
         >
-          <p className="font-serif text-[15px] sm:text-[17px] text-[#1B365D] leading-relaxed mb-1 font-semibold">
-            {lang === "es" ? "¡Tu presencia es nuestro mejor regalo!" : "Your presence is our best gift!"}
-          </p>
-          <p className="font-serif text-[12px] sm:text-[13.5px] text-[#1B365D]/75 leading-relaxed font-light italic max-w-sm mx-auto">
-            {lang === "es" 
-              ? "Si deseas tener un detalle adicional con nosotros o con nuestro pequeño Max Christian, te dejamos nuestras opciones:" 
-              : "If you wish to make a gift to us or our little Max Christian, here are our options:"}
+          {/* Subtitle Tag */}
+          <span className="font-sans text-[11px] sm:text-[12.5px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-1">
+            {lang === "es" ? "Muestra de Cariño" : "Token of Love"}
+          </span>
+
+          {/* Calligraphic Script Title */}
+          <h2 className="font-great-vibes text-[50px] sm:text-[68px] md:text-[76px] text-[#1B365D] tracking-wide mb-2 select-none leading-[1.1] font-normal">
+            {lang === "es" ? "Lluvia de Sobres" : "Envelope Shower"}
+          </h2>
+
+          <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-1 mb-4" />
+
+          {/* Description */}
+          <p className="font-serif text-[15px] sm:text-[16.5px] text-[#1B365D]/90 italic max-w-lg leading-relaxed font-medium px-4">
+            {lang === "es"
+              ? "Tu presencia y buenos deseos son nuestro mejor regalo. Si deseas tener un detalle con nosotros, dispondremos de un buzón en la recepción o puedes hacerlo a través de nuestras cuentas:"
+              : "Your presence and warm wishes are our greatest gift. If you wish to give us a present, a mailbox will be available at the reception or via our bank details:"}
           </p>
         </motion.div>
 
-        {/* Dynamic Clipboard Notify Popup */}
-        <AnimatePresence>
-          {copiedValue && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 bg-[#1B365D] text-[#FAF6F0] text-xs font-serif tracking-wider px-5 py-3 rounded-full shadow-xl border border-[#dfb559]/40 flex items-center gap-2"
-            >
-              <Check className="w-4 h-4 text-[#dfb559]" />
-              <span>{lang === "es" ? `Copiado: ${copiedValue}` : `Copied: ${copiedValue}`}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Detailed Gift Box */}
-        <div className="w-full space-y-4 px-2">
-          {giftAccounts.map((account, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.15 }}
-              className="w-full max-w-[460px] mx-auto border border-[#dfb559]/40 bg-white/90 p-5 sm:p-7 rounded-2xl shadow-sm text-center relative"
-            >
-              {/* Owner Header */}
-              <h4 className="font-serif text-[14px] sm:text-[15.5px] font-bold text-[#1B365D] tracking-wide mb-4">
-                {account.owner}
-              </h4>
-
-              {/* Bank Details Rows */}
-              <div className="space-y-2.5 font-serif text-[12.5px] sm:text-[13.5px] text-[#1B365D]">
-                {account.items.map((item, itemIdx) => {
-                  return (
-                    <div
-                      key={itemIdx}
-                      onClick={() => copyToClipboard(item.value, `${item.label} (${item.value})`)}
-                      className="group cursor-pointer flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 hover:bg-[#FAF6F0] p-2 sm:p-2.5 rounded-lg border border-transparent hover:border-[#dfb559]/30 transition-all text-center"
-                      title="Haz clic para copiar"
-                    >
-                      <div className="flex items-center gap-1.5 sm:gap-2">
-                        <span className="font-bold text-[#1B365D]">
-                          {item.label}:
-                        </span>
-                        <span className="font-medium text-[#1B365D]/85 tracking-wider select-all">
-                          {item.value}
-                        </span>
-                      </div>
-                      
-                      <span className="opacity-70 group-hover:opacity-100 transition-opacity duration-300 text-[9.5px] text-[#c5a059] font-bold flex items-center gap-1 sm:ml-1 uppercase tracking-wider">
-                        <Copy className="w-3 h-3" />
-                        <span>{lang === "es" ? "Copiar" : "Copy"}</span>
-                      </span>
-                    </div>
-                  );
-                })}
+        {/* Accounts Box */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="w-full max-w-md bg-white/90 rounded-2xl p-5 sm:p-7 border border-[#dfb559]/40 shadow-sm space-y-4"
+        >
+          {/* BCP Soles */}
+          <div className="bg-[#FAF6F0] rounded-xl p-3.5 sm:p-4 border border-[#dfb559]/25 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#132742] text-[#dfb559] flex items-center justify-center shrink-0">
+                <Building2 className="w-5 h-5" />
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <div className="text-left">
+                <p className="font-sans text-[11px] sm:text-[12px] font-bold text-[#c5a059] uppercase tracking-wider">
+                  BCP Soles
+                </p>
+                <p className="font-serif text-[16px] sm:text-[17px] font-bold text-[#1B365D] tracking-wide">
+                  {bCPFormatter(bcpAccount)}
+                </p>
+                <p className="text-[11px] sm:text-[12px] text-[#1B365D]/75 font-mono">
+                  CCI: {bcpCci}
+                </p>
+              </div>
+            </div>
 
+            <button
+              onClick={() => handleCopy(bcpAccount, "bcp")}
+              className="p-2 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
+              title="Copiar número de cuenta"
+            >
+              {copiedAccount === "bcp" ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="hidden sm:inline text-emerald-600">Copiado</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <span className="hidden sm:inline">Copiar</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Yape / Plin */}
+          <div className="bg-[#FAF6F0] rounded-xl p-3.5 sm:p-4 border border-[#dfb559]/25 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#7209B7] to-[#4361EE] text-white flex items-center justify-center shrink-0 shadow-xs">
+                <Smartphone className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <p className="font-sans text-[11px] sm:text-[12px] font-bold text-[#7209B7] uppercase tracking-wider">
+                  Yape / Plin
+                </p>
+                <p className="font-serif text-[17px] sm:text-[18px] font-bold text-[#1B365D] tracking-wide">
+                  {yapePlinPhone}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleCopy("980852503", "yape")}
+              className="p-2 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-[#FAF6F0] text-[#1B365D] border border-[#dfb559]/40 text-xs font-sans font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer shrink-0"
+              title="Copiar número Yape / Plin"
+            >
+              {copiedAccount === "yape" ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="hidden sm:inline text-emerald-600">Copiado</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <span className="hidden sm:inline">Copiar</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          <p className="text-[11.5px] sm:text-[12.5px] text-center text-[#1B365D]/75 font-serif italic pt-1">
+            ¡Muchas gracias por su amor y generosidad!
+          </p>
+        </motion.div>
       </div>
     </section>
   );
+}
+
+function bCPFormatter(val: string) {
+  return val.replace(/(\d{3})(\d{8})(\d{3})/, "$1-$2-$3");
 }
