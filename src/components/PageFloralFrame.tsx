@@ -17,7 +17,7 @@ export default function PageFloralFrame({
         alt="Decoración floral superior derecha"
         className="absolute top-0 right-0 w-[120px] sm:w-[190px] md:w-[240px] max-w-[32vw] h-auto object-contain object-right-top origin-top-right opacity-90 transition-opacity duration-700"
         referrerPolicy="no-referrer"
-        loading="lazy"
+        decoding="async"
       />
 
       {/* 2. BOTTOM-LEFT FLORAL ACCENT (izquierda_abajo.png) */}
@@ -26,7 +26,7 @@ export default function PageFloralFrame({
         alt="Decoración floral inferior izquierda"
         className="absolute bottom-0 left-0 w-[130px] sm:w-[200px] md:w-[250px] max-w-[34vw] h-auto object-contain object-left-bottom origin-bottom-left opacity-90 transition-opacity duration-700"
         referrerPolicy="no-referrer"
-        loading="lazy"
+        decoding="async"
       />
 
       {/* 3. OPTIONAL BOTTOM-RIGHT FLORAL ACCENT (derecha_abajo.png) */}
@@ -36,7 +36,7 @@ export default function PageFloralFrame({
           alt="Decoración floral inferior derecha"
           className="absolute bottom-0 right-0 w-[110px] sm:w-[170px] md:w-[210px] max-w-[28vw] h-auto object-contain object-right-bottom origin-bottom-right opacity-75 transition-opacity duration-700"
           referrerPolicy="no-referrer"
-          loading="lazy"
+          decoding="async"
         />
       )}
 

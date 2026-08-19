@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Users, Church, Sparkles, Heart } from "lucide-react";
+import { Church, Sparkles } from "lucide-react";
 import PageFloralFrame from "./PageFloralFrame";
 import { useLanguage } from "../hooks/useLanguage";
 
@@ -13,26 +13,32 @@ export default function FamilyTribute() {
 
       <div className="w-full flex flex-col items-center">
         
-        {/* 1. TOP PHOTO: PREBODA_01 (Edge-to-edge, sin marco, con desvanecido inferior suave) */}
-        <div className="relative w-full overflow-hidden">
+        {/* 1. TOP PHOTO: PREBODA_01 (Edge-to-edge, optimized Cloudinary delivery) */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full overflow-hidden"
+        >
           <div className="relative aspect-[16/10] sm:aspect-[21/9] w-full">
             <img
-              src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786922670/PREBODA_01.jpg.jpg"
+              src="https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_1000/v1786922670/PREBODA_01.jpg.jpg"
               alt="Melissa y Jhimy - Nuestras Familias"
               className="w-full h-full object-cover object-[center_35%]"
               referrerPolicy="no-referrer"
+              decoding="async"
+              loading="eager"
             />
             {/* Smooth bottom gradient fade into parchment */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#FAF6F0] via-[#FAF6F0]/50 to-transparent pointer-events-none" />
           </div>
-        </div>
+        </motion.div>
 
         {/* 2. TEXTO PRINCIPAL: Justo donde se desvanece la foto */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-center px-4 sm:px-6 -mt-8 sm:-mt-12 relative z-10 mb-6 sm:mb-8 max-w-3xl w-full"
         >
           <div className="inline-flex items-center gap-1.5 text-[#c5a059] mb-1">
@@ -51,10 +57,9 @@ export default function FamilyTribute() {
 
         {/* 3. PARENTS & WEDDING GODPARENTS */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.1 }}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6 sm:space-y-8 max-w-3xl w-full px-4 sm:px-6 mx-auto mb-6"
         >
           {/* Parents Row */}
@@ -117,26 +122,32 @@ export default function FamilyTribute() {
           </div>
         </motion.div>
 
-        {/* 4. FOTO DEL NIÑO: PREBODA_05_corregid (Encuadre perfecto en rostro completo, ojos y cuerpo del niño) */}
-        <div className="relative w-full overflow-hidden mt-6">
+        {/* 4. FOTO DEL NIÑO: PREBODA_05_corregid (Optimized Cloudinary delivery) */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full overflow-hidden mt-6"
+        >
           <div className="relative aspect-[4/3] sm:aspect-[16/10] max-h-[460px] w-full">
             <img
-              src="https://res.cloudinary.com/lfwlqotz/image/upload/v1786922664/PREBODA_05_corregid.jpg.jpg"
+              src="https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_800/v1786922664/PREBODA_05_corregid.jpg.jpg"
               alt="Max Christian - Bautizo"
               className="w-full h-full object-cover object-[center_42%]"
               referrerPolicy="no-referrer"
+              decoding="async"
+              loading="eager"
             />
             {/* Smooth bottom gradient fade so it seamlessly transitions into the baptism section */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#FAF6F0] via-[#FAF6F0]/60 via-30% to-transparent pointer-events-none" />
           </div>
-        </div>
+        </motion.div>
 
         {/* 5. BAPTISM SECTION: Ubicado elegantemente donde desvanece la foto sin tapar el rostro */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
+        <motion.div 
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center text-center px-4 sm:px-6 -mt-8 sm:-mt-12 relative z-10 pb-12 sm:pb-16 max-w-xl w-full"
         >
           <div className="inline-flex items-center gap-1.5 mb-1 text-[#c5a059]">
