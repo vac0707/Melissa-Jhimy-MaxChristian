@@ -121,8 +121,8 @@ export default function CollaborativeAlbumSection({ onOpenUploader }: SectionPro
 
           <p className="font-serif text-[16px] sm:text-[18px] text-[#1B365D] max-w-xl mx-auto leading-relaxed font-normal italic px-2">
             {lang === "es"
-              ? "Queremos ver nuestra boda, primer año y el bautizo de Max Christian a través de tus ojos. Escanea el código QR o haz clic abajo para subir tus fotos organizadas por categorías."
-              : "We want to see our wedding, first year, and Max Christian's baptism through your eyes. Scan the QR code or click below to upload your photos organized by category."}
+              ? "Queremos ver nuestra boda y el bautizo de Max Christian a través de tus ojos. Escanea el código QR o haz clic abajo para subir tus fotos organizadas por categorías."
+              : "We want to see our wedding and Max Christian's baptism through your eyes. Scan the QR code or click below to upload your photos organized by category."}
           </p>
 
           <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-[#dfb559] to-transparent mx-auto mt-3.5" />

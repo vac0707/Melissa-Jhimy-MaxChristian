@@ -6,6 +6,8 @@ import {
   BookOpen, 
   List, 
   X, 
+  Sparkles,
+  Heart,
   Home
 } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
@@ -24,19 +26,6 @@ interface PageTurnContainerProps {
   onPageChange: (pageIndex: number) => void;
 }
 
-// Critical images across the book to pre-cache in background for 60fps instant transitions
-const PRELOAD_IMAGES = [
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_1000/v1786922670/PREBODA_01.jpg.jpg",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_800/v1786922664/PREBODA_05_corregid.jpg.jpg",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_600/v1787082811/01.png",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_600/v1787098120/ii.png",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_600/v1787082601/03.jpg",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/f_auto,q_auto,w_600/v1787082604/04.jpg",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/v1786990382/rosa.png",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/v1786990914/izquierda_abajo.png",
-  "https://res.cloudinary.com/lfwlqotz/image/upload/v1786990915/derecha_abajo.png",
-];
-
 export default function PageTurnContainer({
   pages,
   currentPage,
@@ -50,19 +39,10 @@ export default function PageTurnContainer({
 
   const totalPages = pages.length;
 
-  // Preload all critical book images on mount so flipping pages is instantaneous and smooth
-  useEffect(() => {
-    PRELOAD_IMAGES.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
   const goToPage = (newIndex: number) => {
     if (newIndex < 0 || newIndex >= totalPages || newIndex === currentPage) return;
     setDirection(newIndex > currentPage ? 1 : -1);
     onPageChange(newIndex);
-    window.scrollTo({ top: 0, behavior: "auto" });
     setIsMenuOpen(false);
   };
 
@@ -91,7 +71,7 @@ export default function PageTurnContainer({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentPage, totalPages]);
 
-  // Touch swipe handling with directional threshold
+  // Touch swipe handling
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -103,7 +83,7 @@ export default function PageTurnContainer({
     const deltaY = e.changedTouches[0].clientY - touchStartY.current;
 
     // Only trigger if horizontal swipe is significantly stronger than vertical scroll
-    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25) {
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
       if (deltaX < 0) {
         handleNext();
       } else {
@@ -114,66 +94,77 @@ export default function PageTurnContainer({
     touchStartY.current = null;
   };
 
-  // 3-Second Cinematic 3D Virtual Book Page Flip Animation Variants
-  const bookPageVariants = {
+  // Standard 3D page curl / flip variants (without expensive boxShadow animations)
+  const defaultPageVariants = {
     enter: (dir: number) => ({
-      rotateY: dir > 0 ? 65 : -65,
-      x: dir > 0 ? "40%" : "-40%",
+      rotateY: dir > 0 ? 32 : -32,
+      x: dir > 0 ? "14%" : "-14%",
       opacity: 0,
-      scale: 0.92,
+      scale: 0.98,
       transformOrigin: dir > 0 ? "left center" : "right center",
-      boxShadow: dir > 0 
-        ? "-40px 0 60px rgba(0, 0, 0, 0.5), 0 25px 50px rgba(0, 0, 0, 0.35)" 
-        : "40px 0 60px rgba(0, 0, 0, 0.5), 0 25px 50px rgba(0, 0, 0, 0.35)",
-      zIndex: 2,
     }),
     center: {
       rotateY: 0,
       x: 0,
       opacity: 1,
       scale: 1,
-      zIndex: 2,
       transformOrigin: "center center",
-      boxShadow: "0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15)",
       transition: {
-        rotateY: { duration: 3.0, ease: [0.25, 1, 0.4, 1] },
-        x: { duration: 2.9, ease: [0.25, 1, 0.4, 1] },
-        opacity: { duration: 2.2, ease: [0.25, 1, 0.4, 1] },
-        scale: { duration: 2.9, ease: [0.25, 1, 0.4, 1] },
-        boxShadow: { duration: 2.8 },
+        duration: 0.6,
+        ease: [0.25, 1, 0.5, 1],
       },
     },
     exit: (dir: number) => ({
-      rotateY: dir > 0 ? -70 : 70,
-      x: dir > 0 ? "-40%" : "40%",
+      rotateY: dir > 0 ? -32 : 32,
+      x: dir > 0 ? "-14%" : "14%",
       opacity: 0,
-      scale: 0.91,
-      zIndex: 1,
+      scale: 0.98,
       transformOrigin: dir > 0 ? "left center" : "right center",
-      boxShadow: dir > 0 
-        ? "40px 0 60px rgba(0, 0, 0, 0.55)" 
-        : "-40px 0 60px rgba(0, 0, 0, 0.55)",
       transition: {
-        rotateY: { duration: 2.8, ease: [0.3, 0, 0.7, 1] },
-        x: { duration: 2.8, ease: [0.3, 0, 0.7, 1] },
-        opacity: { duration: 2.0, ease: [0.3, 0, 0.7, 1] },
-        scale: { duration: 2.8 },
+        duration: 0.48,
+        ease: [0.4, 0, 0.6, 1],
+      },
+    }),
+  };
+
+  // Ultra-lightweight 3D variant specifically for "familia" (no scale, no x shift, no shadow rasterization)
+  const familyPageVariants = {
+    enter: (dir: number) => ({
+      rotateY: dir > 0 ? 28 : -28,
+      opacity: 0,
+      transformOrigin: dir > 0 ? "left center" : "right center",
+    }),
+    center: {
+      rotateY: 0,
+      opacity: 1,
+      transformOrigin: "center center",
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 1, 0.5, 1],
+      },
+    },
+    exit: (dir: number) => ({
+      rotateY: dir > 0 ? -28 : 28,
+      opacity: 0,
+      transformOrigin: dir > 0 ? "left center" : "right center",
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.6, 1],
       },
     }),
   };
 
   const activePage = pages[currentPage];
+  const isFamilyTarget = activePage?.id === "familia";
+  const currentVariants = isFamilyTarget ? familyPageVariants : defaultPageVariants;
 
   return (
     <div 
-      className="relative min-h-[100svh] w-full bg-[#0d1b2e] overflow-x-hidden"
+      className="relative min-h-[100svh] w-full bg-[#11223B] overflow-x-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      style={{ perspective: "2200px" }}
+      style={{ perspective: "2500px" }}
     >
-      {/* Subtle Book Spine Center Ambience / Background Texture */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(27,54,93,0.4)_0%,rgba(10,20,35,0.95)_100%)] z-0" />
-
       {/* Top Floating Mini Header with Page Title & Index Menu Trigger */}
       <header className="fixed top-3 inset-x-0 z-40 px-3 sm:px-6 pointer-events-none flex items-center justify-between max-w-5xl mx-auto">
         {/* Left: Quick Home / Cover button */}
@@ -200,36 +191,27 @@ export default function PageTurnContainer({
         </button>
       </header>
 
-      {/* Main 3D Animated Virtual Book Page Screen */}
-      <main className="relative w-full min-h-[100svh] flex flex-col justify-center items-center overflow-hidden z-10">
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+      {/* Main 3D Animated Page Screen */}
+      <main className="relative w-full min-h-[100svh] flex flex-col justify-center items-center">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={activePage?.id || currentPage}
             custom={direction}
-            variants={bookPageVariants}
+            variants={currentVariants}
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full min-h-[100svh] relative flex flex-col justify-center origin-center"
+            onAnimationComplete={() => {
+              window.scrollTo(0, 0);
+            }}
+            className="w-full min-h-[100svh] relative flex flex-col justify-center"
             style={{ 
               transformStyle: "preserve-3d",
-              willChange: "transform, opacity",
               backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
             }}
           >
-            {/* Smooth 3-second Content Reveal for Soft, Luxurious Entrance */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2.4, delay: 0.3, ease: [0.25, 1, 0.4, 1] }}
-              className="w-full h-full flex flex-col justify-center"
-            >
-              {activePage?.component}
-            </motion.div>
-
-            {/* Subtle Virtual Book Binding Spine Shadow on Side Edges */}
-            <div className="absolute inset-y-0 left-0 w-6 sm:w-10 pointer-events-none bg-gradient-to-r from-black/15 via-black/5 to-transparent z-20" />
-            <div className="absolute inset-y-0 right-0 w-6 sm:w-10 pointer-events-none bg-gradient-to-l from-black/15 via-black/5 to-transparent z-20" />
+            {activePage?.component}
           </motion.div>
         </AnimatePresence>
       </main>
