@@ -10,8 +10,8 @@ export default function FinalPage() {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Boda & Bautizo: Melissa y Jhimy",
-      text: "Te invitamos con mucha alegría a acompañarnos en nuestro matrimonio y bautizo de Max Christian este 7 de setiembre del 2026. ¡Confirma tu asistencia!",
+      title: "Boda, Bautizo y 1er Año: Melissa, Jhimy y Max Christian",
+      text: "Te invitamos con mucha alegría a acompañarnos en nuestro Matrimonio, Bautizo y Primer Año de Max Christian este 7 de setiembre del 2026. ¡Confirma tu asistencia!",
       url: window.location.href,
     };
 

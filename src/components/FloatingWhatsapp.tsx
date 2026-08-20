@@ -25,8 +25,8 @@ export default function FloatingWhatsapp({ systemUnlocked }: FloatingProps) {
 
   const phoneNum = "51966740525";
   const defaultText = lang === "es"
-    ? "¡Hola Melissa y Jhimy! 💍🕊️ Acabo de abrir su hermosa invitación de matrimonio y bautizo de Max Christian. ¡Qué emoción compartir con ustedes este gran acontecimiento!"
-    : "Hello Melissa & Jhimy! 💍🕊️ I just opened your beautiful wedding and baptism invitation for Max Christian. How exciting to celebrate with you!";
+    ? "¡Hola Melissa y Jhimy! 💍🕊️🎂 Acabo de abrir su hermosa invitación de matrimonio, bautizo y primer año de Max Christian. ¡Qué alegría tan grande compartir con ustedes esta triple celebración!"
+    : "Hello Melissa & Jhimy! 💍🕊️🎂 I just opened your beautiful wedding, baptism and 1st birthday invitation for Max Christian. How exciting to celebrate with you!";
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(defaultText)}`;
 
   return (

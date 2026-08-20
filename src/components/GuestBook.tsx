@@ -244,8 +244,8 @@ export default function GuestBook() {
 
   const sendWishViaWhatsApp = (wishMsg: string, wishAuthor: string) => {
     const text = lang === "es"
-      ? `💌 *Deseo para el Libro de Firmas* 💌\n\nDe: *${wishAuthor}*\n\n"${wishMsg}"\n\n¡Muchas felicidades Melissa, Jhimy y Max Christian! 💍✨`
-      : `💌 *Guestbook Wish* 💌\n\nFrom: *${wishAuthor}*\n\n"${wishMsg}"\n\nCongratulations Melissa, Jhimy & Max Christian! 💍✨`;
+      ? `💌 *Deseo para el Libro de Firmas* 💌\n\nDe: *${wishAuthor}*\n\n"${wishMsg}"\n\n¡Muchas felicidades Melissa y Jhimy en su Boda, y a Max Christian en su Bautizo y Primer Añito! 💍🕊️🎂✨`
+      : `💌 *Guestbook Wish* 💌\n\nFrom: *${wishAuthor}*\n\n"${wishMsg}"\n\nCongratulations Melissa & Jhimy on your Wedding, and to Max Christian on his Baptism & 1st Birthday! 💍🕊️🎂✨`;
     window.open(`https://wa.me/51966740525?text=${encodeURIComponent(text)}`, "_blank");
   };
 
